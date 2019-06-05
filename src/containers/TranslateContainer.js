@@ -10,14 +10,16 @@ class TranslateContainer extends Component {
     // const orgareaHolder = <OrgMessage/>
     return(
       <div className='TranslateContainer'>
-        <h1>translate here</h1>
+        <h1>Translate Here</h1>
 
         <form >
           <h3><i>Translate Text:</i></h3>
-          <div className="TranslaeBox">
-            <SelectLang/>
-            <OrgMessage/>
-            <TransMessage/>
+          <div className="TranslateBox">
+            <tr>
+              <td><OrgMessage/></td>
+              <td><SelectLang/></td>
+              <td><TransMessage/></td>
+            </tr>
           </div>
         <input type="submit" value="Translate"/>
         </form>

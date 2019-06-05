@@ -7,7 +7,7 @@ render () {
   return(
     <Fragment>
       <h4>Translated Message</h4>
-      <textarea></textarea>
+      <textarea maxlength="5"></textarea>
     </Fragment>
     )
   }

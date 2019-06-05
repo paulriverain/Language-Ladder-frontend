@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 6s linear;
+  animation: App-logo-spin infinite 16s linear;
   height: 15vmin;
 }
 
@@ -30,9 +30,22 @@
 }
 
 .TranslateContainer {
+  border-style: dashed;
+  border-color: red;
+
   text-align: center;
-  outline-style: dotted;
   width: 80%;
   margin-right: 10%;
   margin-left: 10%;
+  padding-bottom: 2%;
+}
+
+.TranslateBox{
+    text-align: center;
+    align-items: center;
+  border-style: dashed;
+  border-color: blue;
+  padding-left: 30%;
+  padding-right: 30%;
+
 }
