@@ -3,18 +3,15 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+  animation: App-logo-spin infinite 6s linear;
+  height: 15vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #292b74;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -30,4 +27,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.TranslateContainer {
+  text-align: center;
+  outline-style: dotted;
+  width: 80%;
+  margin-right: 10%;
+  margin-left: 10%;
 }
