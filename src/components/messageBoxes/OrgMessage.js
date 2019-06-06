@@ -7,7 +7,7 @@ render () {
   return(
     <Fragment>
       <h4>Original Message</h4>
-      <textarea maxlength="5"></textarea>
+      <textarea maxLength="7" onChange={this.props.onType}></textarea>
     </Fragment>
     )
   }

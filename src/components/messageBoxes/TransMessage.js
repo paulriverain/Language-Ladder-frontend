@@ -7,7 +7,7 @@ render () {
   return(
     <Fragment>
       <h4>Translated Message</h4>
-      <textarea maxlength="5"></textarea>
+      <textarea maxLength="12" value={this.props.afterSub}></textarea>
     </Fragment>
     )
   }

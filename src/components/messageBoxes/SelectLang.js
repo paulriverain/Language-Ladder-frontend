@@ -14,10 +14,10 @@ class SelectLang extends Component {
   }
 
   render () {
-    // use an on change to toggle between language codes.. 
+    // use an on change to toggle between language codes..
     return(
       <div className="dropdown">
-        <select >
+        <select onChange={this.props.selectLang}>
           <option value="">Languages...</option>
           {this.state.languages.map( language => {
             return <option key={language.id} value={language.lang_code}>{language.lang_name}</option>
