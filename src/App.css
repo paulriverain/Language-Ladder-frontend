@@ -7,13 +7,14 @@
   height: 15vmin;
 }
 
+
 .App-header {
-  background-color: #292b74;
+  background-color:#98CA32;
   min-height: 15vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #340913;
 }
 
 .App-link {
@@ -32,7 +33,6 @@
 .TranslateContainer {
   border-style: dashed;
   border-color: red;
-
   text-align: center;
   width: 80%;
   margin-right: 10%;
@@ -41,11 +41,30 @@
 }
 
 .TranslateBox{
-    text-align: center;
-    align-items: center;
-  border-style: dashed;
-  border-color: blue;
   padding-left: 30%;
   padding-right: 30%;
+  align-items: center;
+  border-style: dashed;
+  border-color: blue;
+}
 
+.PhraseContainer{
+  background-color: #d0ff69;
+  border: 1px dashed;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  width: 60%;
+  min-width: 250px;
+  color:#D61A46;
+}
+
+.phraseCard{
+  background: #ffebba;
+  border: 1px solid #999;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2%;
+  color: #B8143A;
 }

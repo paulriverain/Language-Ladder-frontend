@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import HeaderNav from '../components/HeaderNav.js'
 import TranslateContainer from './TranslateContainer.js'
 import LoginSignUp from './LoginSignUp.js'
-
+import PhrasesContainer from './PhrasesContainer.js'
 
 class MainContainer extends Component {
   state= {
@@ -28,13 +28,9 @@ class MainContainer extends Component {
 
 
   componentDidMount(){
-    //Fetches for all the reviews
-      // fetch('http://localhost:3000/api/v1/reviews')
-      // .then(res=> res.json())
-      // .then(reviews => this.setState({reviews: reviews}))
-    //Fetches for the token
     const token = localStorage.getItem('token')
     if(token) {
+    //Fetches for the token
       fetch('http://localhost:3000/api/v1/current_user', {
         headers: {
           Authenticate: token
@@ -44,30 +40,63 @@ class MainContainer extends Component {
       .then(user => {
         if (!user.error) {
           this.setState({currentUser: user})
+          this.showsPhrases()
         }
       })
     }
   }
 
-  render () {
+  showsPhrases = () => {
+    //Fetches for all the phrases
+    fetch('http://localhost:3000/api/v1/phrases')
+    .then(res=> res.json())
+    .then(phrases => this.setState({phrases: phrases}))
+  }
 
+// handlesCreateUser = () => {
+//   fetch('http://localhost:3000/api/v1/user',{
+//     method: "POST",
+//     headers:{
+//       "Content-Type": "application/json",
+//       Accept: "application/json"
+//     },
+//     body: JSON.stringify(this.state)
+//   })
+//   .then(console.log)
+// }
+
+
+handlesCreateUser = (loginInfo) =>{
+  console.log('hit the main for create');
+  this.handleLogin(loginInfo)
+
+}
+
+
+  render () {
     return(
       <Fragment>
 
-        <HeaderNav />
-        {!this.state.currentUser ? <LoginSignUp handleLogin={this.handleLogin} onLogin={this.handleLogin}/> : <h1>hello</h1>}
-        {this.state.currentUser ?
-                  <button type='button' onClick={this.handleLogoutClick} name="logoutBtn"><h3>LOG OUT</h3></button>
-                  : null
-                }
-        <div className="AppBody">
-
-          <TranslateContainer/>
-
+        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick}/>
+        <div >
+          {!this.state.currentUser ? <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}  /> : <h1>hello {this.state.currentUser.username}</h1>}
+          {this.state.currentUser ? <button type='button' onClick={this.handleLogoutClick} name="logoutBtn"><h3>LOG OUT</h3></button> : null}
         </div>
+
+        <div className="AppBody">
+          <TranslateContainer/>
+          { this.state.currentUser ?  <PhrasesContainer/>  :  null  }
+        </div>
+
       </Fragment>
     )
   }
 
 }
+
+
+
+
+
+
 export default MainContainer;

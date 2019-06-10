@@ -9,8 +9,8 @@ render () {
   return(
     <div className="App">
 
-      <Login handleLogin={this.props.handleLogin} onLogin={this.props.onLogin}/>
-      <CreateUser/>
+      <Login onLogin={this.props.onLogin}/>
+      <CreateUser onCreateUser={this.props.onCreateUser}  handleLogin={this.props.handleLogin}/>
 
     </div>
     )

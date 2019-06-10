@@ -30,6 +30,7 @@ class CreateUser extends Component {
         alert("That Username already exists!")
       }
       else {
+        this.props.onCreateUser(signUp)
         alert("Your new account has been created!")
       }
     })
