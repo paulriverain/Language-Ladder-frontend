@@ -3,6 +3,9 @@ import HeaderNav from '../components/HeaderNav.js'
 import TranslateContainer from './TranslateContainer.js'
 import LoginSignUp from './LoginSignUp.js'
 import PhrasesContainer from './PhrasesContainer.js'
+import { Route, withRouter } from 'react-router-dom';
+
+
 
 class MainContainer extends Component {
   state= {
@@ -16,14 +19,18 @@ class MainContainer extends Component {
     // debugger
       localStorage.setItem("token", loginInfo.token)
       this.setState({currentUser: loginInfo})
-      // this.props.history.push("/")
+      this.props.history.push("/")
     }
   handleLogoutClick = ()=>{
     localStorage.removeItem("token")
     this.setState({currentUser: null})
-    // this.props.history.push("/")
+    this.props.history.push("/")
   }
 
+bringsLogin = () =>{
+  console.log('Hit mains bringsLogin func -----------');
+  this.props.history.push("/login")
+}
 
 
 
@@ -72,31 +79,43 @@ handlesCreateUser = (loginInfo) =>{
 
 }
 
+// {this.state.currentUser ? <button type='button' onClick={this.handleLogoutClick} name="logoutBtn"><h3>LOG OUT</h3></button> : null}
+
+
+// router will hold LoginSignUp and show when click login button on nav
 
   render () {
     return(
-      <Fragment>
 
-        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick}/>
-        <div >
-          {!this.state.currentUser ? <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}  /> : <h1>hello {this.state.currentUser.username}</h1>}
-          {this.state.currentUser ? <button type='button' onClick={this.handleLogoutClick} name="logoutBtn"><h3>LOG OUT</h3></button> : null}
-        </div>
+  <Fragment>
 
-        <div className="AppBody">
-          <TranslateContainer/>
-          { this.state.currentUser ?  <PhrasesContainer/>  :  null  }
-        </div>
+        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick} showForms={this.bringsLogin} />
 
-      </Fragment>
-    )
+
+    <Route exact path="/" render={ () => {
+        return (
+          <Fragment>
+            <div className="AppBody">
+              <TranslateContainer/>
+              { this.state.currentUser ?  <PhrasesContainer/>  :  null  }
+            </div>
+          </Fragment>
+        )
+      }}/>
+
+
+    <Route exact path="/login" render={ () => {
+        return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin} />
+    }}/>
+
+  </Fragment>
+
+    );
   }
-
 }
 
 
 
 
 
-
-export default MainContainer;
+export default withRouter(MainContainer);

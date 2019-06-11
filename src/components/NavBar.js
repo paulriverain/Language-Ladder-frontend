@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import '../navbar.css'
 import LoginSignUp from '../containers/LoginSignUp.js'
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -18,9 +19,13 @@ invokesLogout=(e) => {
 
 showsLoginForm=() => {
 console.log('Hit here login' );
-  // this.props.handleLogout()
+  this.props.showForms()
   // this.props.history.push("/login")
 }
+
+
+
+
 
 
 
@@ -39,7 +44,12 @@ render () {
           <div class="topnav-centered">
             <a onClick={this.showsLoginForm}><h3>Login</h3></a>
           </div>
+
+
+
+
         </Fragment>
+
           :
 
       <Fragment>
@@ -50,11 +60,12 @@ render () {
         <a class="active">Hello {this.props.currentUser.username}</a>
         </div>
         <div class="topnav-right">
-          <a >Edit</a>
+          <a >Edit Profile</a>
           <button type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>LOG OUT</h3></button>
         </div>
       </Fragment>
       }
+
 
 
 

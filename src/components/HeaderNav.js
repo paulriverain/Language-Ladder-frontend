@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../navbar.css'
 import LoginSignUp from '../containers/LoginSignUp.js'
 import NavBar from './NavBar.js'
+import { BrowserRouter as Route, withRouter } from 'react-router-dom'
 
 
 class HeaderNav extends Component {
@@ -15,9 +16,13 @@ render () {
         <h1><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" />  <i>Language Ladder</i><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" /></h1>
         <p><i>Climbing Over Language Barriers Since 2019</i></p>
       </div>
-      <NavBar currentUser={this.props.currentUser}  onLogout={this.props.onLogout}/>
+
+      <Route>
+        <NavBar currentUser={this.props.currentUser}  onLogout={this.props.onLogout} showForms={this.props.showForms}/>
+      </Route>
+
     </div>
     )
   }
 }
-export default HeaderNav;
+export default withRouter(HeaderNav);

@@ -9,12 +9,12 @@
 
 
 .App-header {
-  background-color:#98CA32;
+  background-color:#498F7F;
   min-height: 15vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  color: #340913;
+  color: #FFFFFF;
 }
 
 .App-link {
@@ -49,22 +49,22 @@
 }
 
 .PhraseContainer{
-  background-color: #d0ff69;
+  background-color: #7abd61;
   border: 1px dashed;
   text-align: center;
   align-items: center;
   margin: auto;
   width: 60%;
   min-width: 250px;
-  color:#D61A46;
+  color:#000000;
 }
 
 .phraseCard{
-  background: #ffebba;
+  background: #c0ecb0;
   border: 1px solid #999;
   align-items: center;
   width: 80%;
   margin: auto;
   margin-bottom: 2%;
-  color: #B8143A;
+  color: #33721c;
 }
