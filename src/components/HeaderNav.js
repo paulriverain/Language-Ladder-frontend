@@ -18,7 +18,7 @@ render () {
       </div>
 
       <Route>
-        <NavBar currentUser={this.props.currentUser}  onLogout={this.props.onLogout} showForms={this.props.showForms}/>
+        <NavBar currentUser={this.props.currentUser}  onLogout={this.props.onLogout} showForms={this.props.showForms} sendHome={this.props.sendHome}/>
       </Route>
 
     </div>

@@ -9,20 +9,38 @@ class NavBar extends Component {
 
 
 
-invokesLogout=(e) => {
-  e.preventDefault()
-  console.log('Hit here logout' );
+invokesLogout=() => {
+  //changes state of currentUser through callback to MainContainer
+  // e.preventDefault()
   this.props.onLogout()
-
 }
 
 
 showsLoginForm=() => {
-console.log('Hit here login' );
+  //changes route to login page through callback on MainContainer
   this.props.showForms()
-  // this.props.history.push("/login")
 }
 
+toMainPage = () => {
+  this.props.sendHome()
+
+}
+
+
+
+
+// //change between hello in diff Languages
+// carousel= ()=> {
+//   let words = ['1', '2', '3']
+//   words.map(function(word){
+//     console.log(word);
+//     return <h2>{word}</h2>
+//   })
+// }
+//
+// handlesHello = () => {
+//   // setInterval(this.carousel, 2000); // Change image every 2 seconds
+// }
 
 
 
@@ -38,7 +56,7 @@ render () {
         {!this.props.currentUser ?
         <Fragment>
           <div>
-            <a>Home</a>
+            <a  onClick={this.toMainPage}>Home</a>
           </div>
 
           <div class="topnav-centered">
@@ -54,10 +72,10 @@ render () {
 
       <Fragment>
         <div>
-        <a href="">Home</a>
+        <a  onClick={this.toMainPage}>Home</a>
         </div>
         <div class="topnav-centered">
-        <a class="active">Hello {this.props.currentUser.username}</a>
+        <a class="active" >Hello {this.props.currentUser.username}</a>
         </div>
         <div class="topnav-right">
           <a >Edit Profile</a>
