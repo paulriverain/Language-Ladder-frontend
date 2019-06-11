@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../navbar.css'
-import LoginSignUp from '../containers/LoginSignUp.js'
+// import LoginSignUp from '../containers/LoginSignUp.js'
 import NavBar from './NavBar.js'
 import { BrowserRouter as Route, withRouter } from 'react-router-dom'
 

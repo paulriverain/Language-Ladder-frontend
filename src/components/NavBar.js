@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import '../navbar.css'
-import LoginSignUp from '../containers/LoginSignUp.js'
-import { withRouter } from 'react-router-dom'
+// import LoginSignUp from '../containers/LoginSignUp.js'
+// import { withRouter } from 'react-router-dom'
 
 
 

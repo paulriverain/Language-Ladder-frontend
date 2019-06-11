@@ -12,12 +12,18 @@ class MainContainer extends Component {
 //----------------------------------
   state= {
     phrases: [],
-    currentUser: null
+    currentUser: null,
+    // userPhrases: []
   }
 
 // Fetches for usertoken and calls phrases for that user if user !null
   componentDidMount(){
     const token = localStorage.getItem('token')
+    fetch('http://localhost:3000/api/v1/phrases')
+    .then(res=> res.json())
+    .then(phrases => {
+      this.setState({phrases: phrases}, () => console.log(this.state.phrases))
+    })
     if(token) {
     //Fetches for the token
       fetch('http://localhost:3000/api/v1/current_user', {
@@ -28,8 +34,10 @@ class MainContainer extends Component {
       .then(resp => resp.json())
       .then(user => {
         if (!user.error) {
+          // debugger
           this.setState({currentUser: user})
-          this.showsPhrases()
+          // this.setState({userPhrases: user.phrases})
+
         }
       })
     }
@@ -48,6 +56,8 @@ class MainContainer extends Component {
   handleLogoutClick = ()=>{
     localStorage.removeItem("token")
     this.setState({currentUser: null})
+    // this.setState({phrases: []})
+    // this.setState({userPhrases: []})
     this.props.history.push("/")
   }
 
@@ -61,24 +71,36 @@ class MainContainer extends Component {
     this.props.history.push("/")
   }
 
-
-  showsPhrases = () => {
-    //Fetches for all the phrases
-    fetch('http://localhost:3000/api/v1/phrases')
-    .then(res=> res.json())
-    .then(phrases => this.setState({phrases: phrases}))
+  handlesCreateUser = (loginInfo) =>{
+    console.log('hit the main for create');
+    this.handleLogin(loginInfo)
   }
 
 
-handlesCreateUser = (loginInfo) =>{
-  console.log('hit the main for create');
-  this.handleLogin(loginInfo)
-}
+
+
+  // showsPhrases = () => {
+  //   //Fetches for all the phrases
+  //   fetch('http://localhost:3000/api/v1/phrases')
+  //   .then(res=> res.json())
+  //   .then(phrases => {
+  //     this.setState({phrases: phrases}, () => console.log(this.state.phrases))
+  //   })
+  // }
+
+
+
+
+
 
 
 //renders page----------------------
 //----------------------------------
   render () {
+    const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
+
+    // console.log(this.state.phrases);
+    // console.log('Phrases====', this.state.phrases);
     return(
 
   <Fragment>
@@ -89,7 +111,7 @@ handlesCreateUser = (loginInfo) =>{
           <Fragment>
             <div className="AppBody">
               <TranslateContainer/>
-              { this.state.currentUser ?  <PhrasesContainer currentUser={this.state.currentUser}/>  :  null  }
+              { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser}/>  :  null  }
             </div>
           </Fragment>
         )

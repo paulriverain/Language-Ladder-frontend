@@ -27,7 +27,7 @@ class TranslateContainer extends Component {
 
 
   handleTranMess = () =>{
-    console.log('Translator was hit');
+    // console.log('Translator was hit');
     console.log(this.state);
 
     fetch('http://localhost:3000/api/v1/phrases/translate',{
@@ -40,17 +40,17 @@ class TranslateContainer extends Component {
     })
     .then(resp => resp.json())
     .then(translated => this.setState({trMess: translated.message.text}, () => console.log(translated)))
-    
+
   }
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    console.log('submit button hit');
+    // console.log('submit button hit');
     this.handleTranMess()
   }
 
+  // console.log('currentTrans state is set to:  ', this.state.trMess);
   render () {
-    console.log('currentTrans state is set to:  ', this.state.trMess);
     return(
       <div className='TranslateContainer'>
         <h1>Translate Here</h1>
