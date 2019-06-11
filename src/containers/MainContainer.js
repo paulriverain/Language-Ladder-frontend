@@ -4,16 +4,20 @@ import TranslateContainer from './TranslateContainer.js'
 import LoginSignUp from './LoginSignUp.js'
 import PhrasesContainer from './PhrasesContainer.js'
 import { Route, withRouter } from 'react-router-dom';
-
+// import OrgMessage from '../components/messageBoxes/OrgMessage.js'
+// import TransMessage from '../components/messageBoxes/TransMessage.js'
+import SelectLang from '../components/messageBoxes/SelectLang.js'
 
 
 class MainContainer extends Component {
-//Handles state --------------------
 //----------------------------------
+//Handles state --------------------
   state= {
     phrases: [],
     currentUser: null,
-    // userPhrases: []
+    currentLang: "",
+    orMess: "",
+    trMess: ""
   }
 
 // Fetches for usertoken and calls phrases for that user if user !null
@@ -34,10 +38,7 @@ class MainContainer extends Component {
       .then(resp => resp.json())
       .then(user => {
         if (!user.error) {
-          // debugger
           this.setState({currentUser: user})
-          // this.setState({userPhrases: user.phrases})
-
         }
       })
     }
@@ -78,18 +79,54 @@ class MainContainer extends Component {
 
 
 
+//---------------------------------------------
+//for translate -------------------------------
+  handleLang = (e) => {
+    console.log(e.target.value);
+    this.setState({currentLang: e.target.value})
+  }
 
-  // showsPhrases = () => {
-  //   //Fetches for all the phrases
-  //   fetch('http://localhost:3000/api/v1/phrases')
-  //   .then(res=> res.json())
-  //   .then(phrases => {
-  //     this.setState({phrases: phrases}, () => console.log(this.state.phrases))
-  //   })
-  // }
+  handleOrgMess = (e) =>{
+    console.log(e.target.value);
+
+    this.setState({orMess: e.target.value})
+  }
 
 
+  handleTranMess = () =>{
+    // console.log('Translator was hit');
+    // console.log(this.state);
 
+    fetch('http://localhost:3000/api/v1/phrases/translate',{
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(resp => resp.json())
+    .then(translated => this.setState({trMess: translated.message.text}, () => console.log(translated)))
+  }
+
+  handleSubmit = (e) =>{
+    e.preventDefault()
+    // console.log('submit button hit');
+    this.handleTranMess()
+  }
+
+  handleCreatePhrase = () =>{
+    fetch('http://localhost:3000/api/v1/phrases',{
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(resp => resp.json())
+    .then(console.log)
+  }
 
 
 
@@ -99,7 +136,7 @@ class MainContainer extends Component {
   render () {
     const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
 
-    // console.log(this.state.phrases);
+    console.log(this.state);
     // console.log('Phrases====', this.state.phrases);
     return(
 
@@ -110,7 +147,18 @@ class MainContainer extends Component {
         return (
           <Fragment>
             <div className="AppBody">
-              <TranslateContainer/>
+
+
+              <TranslateContainer
+                currentState={this.state}
+                onType={this.handleOrgMess}
+                selectLang={this.handleLang}
+                afterSub={this.state.trMess}
+                forSubmit={this.handleSubmit}
+                makesPhrase= {this.handleCreatePhrase}
+              />
+
+
               { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser}/>  :  null  }
             </div>
           </Fragment>
