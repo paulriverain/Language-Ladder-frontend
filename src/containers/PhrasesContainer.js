@@ -8,7 +8,7 @@ class PhrasesContainer extends Component {
 render () {
   console.log(this.props.phrases);
   const onePhrase = this.props.phrases.map(phrase => {
-    return <PhraseCard phrase={phrase}/>
+    return <PhraseCard phrase={phrase} key={phrase.id}/>
    })
   return(
     <div className="App">

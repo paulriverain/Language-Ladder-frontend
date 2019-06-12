@@ -19,7 +19,7 @@ class SelectLang extends Component {
     return(
       <div className="dropdown">
         <select onChange={this.props.selectLang}>
-          <option value="">Languages...</option>
+          <option defaultValue="">Languages...</option>
           {this.props.currentState.languages.map( language => {
             return <option key={language.id} value={language.lang_code}>{language.lang_name}</option>
           })}

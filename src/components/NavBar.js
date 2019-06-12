@@ -59,7 +59,7 @@ render () {
             <a  onClick={this.toMainPage}>Home</a>
           </div>
 
-          <div class="topnav-centered">
+          <div className="topnav-centered">
             <a onClick={this.showsLoginForm}><h3>Login</h3></a>
           </div>
 
@@ -74,10 +74,10 @@ render () {
         <div>
         <a  onClick={this.toMainPage}>Home</a>
         </div>
-        <div class="topnav-centered">
-        <a class="active" >Hello {this.props.currentUser.username}</a>
+        <div className="topnav-centered">
+        <a className="active" >Hello {this.props.currentUser.username}</a>
         </div>
-        <div class="topnav-right">
+        <div className="topnav-right">
           <a >Edit Profile</a>
           <button type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>LOG OUT</h3></button>
         </div>

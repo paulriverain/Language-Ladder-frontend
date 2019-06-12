@@ -6,6 +6,7 @@ import { BrowserRouter as Route, withRouter } from 'react-router-dom'
 
 
 class HeaderNav extends Component {
+  // <p><i>Language Barrier? Get over it!</i></p>
 
   // {this.props.currentUser ? <button type='button' onClick={this.handleLogoutClick} name="logoutBtn"><h3>LOG OUT</h3></button> : null}
 render () {

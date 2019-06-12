@@ -32,7 +32,7 @@ class MainContainer extends Component {
     fetch('http://localhost:3000/api/v1/phrases')
     .then(res=> res.json())
     .then(phrases => {
-      this.setState({phrases: phrases}, () => console.log(this.state.phrases))
+      this.setState({phrases: phrases})
     })
 
     if(token) {
@@ -55,7 +55,7 @@ class MainContainer extends Component {
 //Callback functions----------------
 //----------------------------------
   handleLogin = (loginInfo) =>{
-    console.log("LOGIN INFO IS", loginInfo)
+    // console.log("LOGIN INFO IS", loginInfo)
     // debugger
       localStorage.setItem("token", loginInfo.token)
       this.setState({currentUser: loginInfo})
@@ -70,7 +70,7 @@ class MainContainer extends Component {
   }
 
   bringsLogin = () =>{
-    console.log('Hit mains bringsLogin func -----------');
+    // console.log('Hit mains bringsLogin func -----------');
     this.props.history.push("/login")
   }
 
@@ -95,7 +95,6 @@ class MainContainer extends Component {
 
   handleOrgMess = (e) =>{
     console.log(e.target.value);
-
     this.setState({orMess: e.target.value})
   }
 
@@ -139,6 +138,7 @@ class MainContainer extends Component {
 let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
 
     console.log(thisCode[0].id);
+    console.log(this.state.currentUser.id);
 
     // if(thisCode.includes(this.state.currentLang)){
       fetch('http://localhost:3000/api/v1/phrases', {
@@ -155,11 +155,9 @@ let thisCode = this.state.currentLang ? this.state.languages.filter( language =>
         })
       })
       .then(resp => resp.json())
-      .then(console.log)
-      // .then(newphrase => {
-      //     this.setState({phrases: newphrase})
-      //   })
-
+      .then(newphrase => {
+          this.setState({phrases: [...this.state.phrases, newphrase]}, () => console.log(this.state.phrases))
+      })
   }
 
 
@@ -170,8 +168,10 @@ let thisCode = this.state.currentLang ? this.state.languages.filter( language =>
   render () {
     const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
 
+
+
     console.log(this.state);
-    // console.log('Phrases====', this.state.phrases);
+    // console.log('Phrases====', userPhrases);
     return(
 
   <Fragment>
