@@ -13,6 +13,7 @@ class MainContainer extends Component {
 //----------------------------------
 //Handles state --------------------
   state= {
+    languages: [],
     phrases: [],
     currentUser: null,
     currentLang: "",
@@ -23,11 +24,17 @@ class MainContainer extends Component {
 // Fetches for usertoken and calls phrases for that user if user !null
   componentDidMount(){
     const token = localStorage.getItem('token')
+
+    fetch('http://localhost:3000/api/v1/languages')
+    .then(res => res.json())
+    .then(languages => this.setState({languages: languages}))
+
     fetch('http://localhost:3000/api/v1/phrases')
     .then(res=> res.json())
     .then(phrases => {
       this.setState({phrases: phrases}, () => console.log(this.state.phrases))
     })
+
     if(token) {
     //Fetches for the token
       fetch('http://localhost:3000/api/v1/current_user', {
@@ -115,17 +122,44 @@ class MainContainer extends Component {
     this.handleTranMess()
   }
 
+
+
+
+
+
+
+
+  //---------------------------------------------
+  //for saving Phrases-------------------------------
+
   handleCreatePhrase = () =>{
-    fetch('http://localhost:3000/api/v1/phrases',{
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(this.state)
-    })
-    .then(resp => resp.json())
-    .then(console.log)
+    console.log('Hits the save phrase in main', this.state.currentLang);
+// console.log('Hits the save phrase in main 2', thisCode)
+
+let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
+
+    console.log(thisCode[0].id);
+
+    // if(thisCode.includes(this.state.currentLang)){
+      fetch('http://localhost:3000/api/v1/phrases', {
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          language_id: thisCode[0].id,
+          user_message: this.state.orMess,
+          new_message: this.state.trMess
+        })
+      })
+      .then(resp => resp.json())
+      .then(console.log)
+      // .then(newphrase => {
+      //     this.setState({phrases: newphrase})
+      //   })
+
   }
 
 
@@ -166,7 +200,7 @@ class MainContainer extends Component {
       }}/>
 
     <Route exact path="/login" render={ () => {
-        return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin} />
+        return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}/>
     }}/>
   </Fragment>
     );

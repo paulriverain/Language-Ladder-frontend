@@ -59,7 +59,7 @@ class TranslateContainer extends Component {
           <div className="TranslateBox">
 
               <OrgMessage onType={this.props.onType}/>
-              <SelectLang selectLang={this.props.selectLang}/>
+              <SelectLang selectLang={this.props.selectLang} currentState={this.props.currentState}/>
               <TransMessage afterSub={this.props.afterSub}/>
 
           </div>
