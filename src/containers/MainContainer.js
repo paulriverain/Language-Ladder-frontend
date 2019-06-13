@@ -6,7 +6,7 @@ import PhrasesContainer from './PhrasesContainer.js'
 import { Route, withRouter } from 'react-router-dom';
 // import OrgMessage from '../components/messageBoxes/OrgMessage.js'
 // import TransMessage from '../components/messageBoxes/TransMessage.js'
-import SelectLang from '../components/messageBoxes/SelectLang.js'
+// import SelectLang from '../components/messageBoxes/SelectLang.js'
 
 
 class MainContainer extends Component {
@@ -154,22 +154,13 @@ class MainContainer extends Component {
     console.log('Hit Delete handler on main:  ', thisPhrase);
     console.log(thisPhrase.id);
     // let removedPhrase = thisPhrase
-
     this.setState({phrases: this.state.phrases.filter((phrase) => phrase !== thisPhrase)})
-
     fetch(`http://localhost:3000/api/v1/phrases/${thisPhrase.id}`, {
       method: "DELETE"
     })
     .then(resp=>resp.json())
     .then(response => alert(response.message))
-
   }
-  //
-
-pesimisticRemove = (thisPhrase) => {
-  console.log('here?!?!?!?');
-
-}
 
 
 
