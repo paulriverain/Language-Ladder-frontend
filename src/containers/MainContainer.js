@@ -56,7 +56,6 @@ class MainContainer extends Component {
 //----------------------------------
   handleLogin = (loginInfo) =>{
     // console.log("LOGIN INFO IS", loginInfo)
-    // debugger
       localStorage.setItem("token", loginInfo.token)
       this.setState({currentUser: loginInfo})
       this.props.history.push("/")
@@ -64,13 +63,10 @@ class MainContainer extends Component {
   handleLogoutClick = ()=>{
     localStorage.removeItem("token")
     this.setState({currentUser: null})
-    // this.setState({phrases: []})
-    // this.setState({userPhrases: []})
     this.props.history.push("/")
   }
 
   bringsLogin = () =>{
-    // console.log('Hit mains bringsLogin func -----------');
     this.props.history.push("/login")
   }
 
@@ -123,43 +119,57 @@ class MainContainer extends Component {
 
 
 
-
-
-
-
-
   //---------------------------------------------
   //for saving Phrases-------------------------------
 
   handleCreatePhrase = () =>{
-    console.log('Hits the save phrase in main', this.state.currentLang);
-// console.log('Hits the save phrase in main 2', thisCode)
+  // console.log('Hits the save phrase in main', this.state.currentLang);
 
-let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
+  let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
 
-    console.log(thisCode[0].id);
-    console.log(this.state.currentUser.id);
-
-    // if(thisCode.includes(this.state.currentLang)){
-      fetch('http://localhost:3000/api/v1/phrases', {
-        method: "POST",
-        headers:{
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          user_id: this.state.currentUser.id,
-          language_id: thisCode[0].id,
-          user_message: this.state.orMess,
-          new_message: this.state.trMess
-        })
+  // console.log(thisCode[0].id);
+  // console.log(this.state.currentUser.id);
+    fetch('http://localhost:3000/api/v1/phrases', {
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        user_id: this.state.currentUser.id,
+        language_id: thisCode[0].id,
+        user_message: this.state.orMess,
+        new_message: this.state.trMess
       })
-      .then(resp => resp.json())
-      .then(newphrase => {
-          this.setState({phrases: [...this.state.phrases, newphrase]}, () => console.log(this.state.phrases))
-      })
+    })
+    .then(resp => resp.json())
+    .then(newphrase => {
+        this.setState({phrases: [newphrase, ...this.state.phrases]}, () => console.log(this.state.phrases))
+    })
   }
 
+  //for Deleting Phrases-------------------------------
+
+  handleDelete =(thisPhrase) =>{
+    console.log('Hit Delete handler on main:  ', thisPhrase);
+    console.log(thisPhrase.id);
+    // let removedPhrase = thisPhrase
+
+    this.setState({phrases: this.state.phrases.filter((phrase) => phrase !== thisPhrase)})
+
+    fetch(`http://localhost:3000/api/v1/phrases/${thisPhrase.id}`, {
+      method: "DELETE"
+    })
+    .then(resp=>resp.json())
+    .then(response => alert(response.message))
+
+  }
+  //
+
+pesimisticRemove = (thisPhrase) => {
+  console.log('here?!?!?!?');
+
+}
 
 
 
@@ -193,7 +203,7 @@ let thisCode = this.state.currentLang ? this.state.languages.filter( language =>
               />
 
 
-              { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser}/>  :  null  }
+              { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser} onDelete={this.handleDelete}/>  :  null  }
             </div>
           </Fragment>
         )

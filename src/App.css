@@ -62,9 +62,37 @@
 .phraseCard{
   background: #c0ecb0;
   border: 1px solid #999;
-  align-items: center;
   width: 80%;
   margin: auto;
   margin-bottom: 2%;
   color: #33721c;
+  height: auto;
+}
+
+.flipcardholder{
+  min-width: 25vw;
+  min-height:  15vh;
+
+  /* margin: auto; */
+  padding-right: 100%;
+  padding-left: 8%;
+}
+
+.messageFlip{
+
+    background: lightblue;
+    border: 1px solid #999;
+    min-width: 180px;
+    width: auto;
+    color: #33721c;
+    height: auto;
+    max-height: 130px;
+  font-size: 70%;
+}
+
+.deletePhrase{
+
+  float: right;
+  padding-right: 4px;
+
 }
