@@ -3,15 +3,16 @@ import HeaderNav from '../components/HeaderNav.js'
 import TranslateContainer from './TranslateContainer.js'
 import LoginSignUp from './LoginSignUp.js'
 import PhrasesContainer from './PhrasesContainer.js'
+import EditUser from '../components/EditUser.js'
 import { Route, withRouter } from 'react-router-dom';
+
 // import OrgMessage from '../components/messageBoxes/OrgMessage.js'
 // import TransMessage from '../components/messageBoxes/TransMessage.js'
-// import SelectLang from '../components/messageBoxes/SelectLang.js'
 
 
 class MainContainer extends Component {
-//----------------------------------
-//Handles state --------------------
+//---------------------------------------------------------------------
+//Handles state -------------------------------------------------------
   state= {
     languages: [],
     phrases: [],
@@ -21,7 +22,8 @@ class MainContainer extends Component {
     trMess: ""
   }
 
-// Fetches for usertoken and calls phrases for that user if user !null
+//-------------------------------------------------------------------------
+// Fetches for usertoken and calls phrases for that user if user !null-----
   componentDidMount(){
     const token = localStorage.getItem('token')
 
@@ -52,8 +54,9 @@ class MainContainer extends Component {
   }
 
 
-//Callback functions----------------
-//----------------------------------
+//------------------------------------------------------------------------
+// Login, create,  logout Callback functions------------------------------
+
   handleLogin = (loginInfo) =>{
     // console.log("LOGIN INFO IS", loginInfo)
       localStorage.setItem("token", loginInfo.token)
@@ -81,9 +84,25 @@ class MainContainer extends Component {
   }
 
 
+//---------------------------------------------------------------------------
+//for Edit ------------------------------------------------------------------
 
-//---------------------------------------------
-//for translate -------------------------------
+handlesEdit = () => {
+  console.log('hit the main for Edit');
+  this.props.history.push("/edit")
+}
+updateCurretUser = (updatedUser) =>{
+  console.log('hit the main for changing user state   ',   updatedUser);
+  console.log(this.state.currentUser);
+  alert(updatedUser.message)
+
+  this.setState({currentUser: {...this.state.currentUser, username: updatedUser.user.username}})
+}
+
+
+//----------------------------------------------------------------------------
+//for translate --------------------------------------------------------------
+
   handleLang = (e) => {
     console.log(e.target.value);
     this.setState({currentLang: e.target.value})
@@ -96,9 +115,6 @@ class MainContainer extends Component {
 
 
   handleTranMess = () =>{
-    // console.log('Translator was hit');
-    // console.log(this.state);
-
     fetch('http://localhost:3000/api/v1/phrases/translate',{
       method: "POST",
       headers:{
@@ -113,14 +129,13 @@ class MainContainer extends Component {
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    // console.log('submit button hit');
     this.handleTranMess()
   }
 
 
 
-  //---------------------------------------------
-  //for saving Phrases-------------------------------
+  //-------------------------------------------------------------------------
+  //for saving Phrases-------------------------------------------------------
 
   handleCreatePhrase = () =>{
   // console.log('Hits the save phrase in main', this.state.currentLang);
@@ -148,7 +163,8 @@ class MainContainer extends Component {
     })
   }
 
-  //for Deleting Phrases-------------------------------
+//----------------------------------------------------------------------------
+//for Deleting Phrases--------------------------------------------------------
 
   handleDelete =(thisPhrase) =>{
     console.log('Hit Delete handler on main:  ', thisPhrase);
@@ -164,25 +180,25 @@ class MainContainer extends Component {
 
 
 
-//renders page----------------------
-//----------------------------------
+
+
+//-----------------------------------------------------------------
+//renders page-----------------------------------------------------
+//-----------------------------------------------------------------
+
   render () {
     const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
 
-
-
     console.log(this.state);
-    // console.log('Phrases====', userPhrases);
     return(
 
   <Fragment>
-        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick} showForms={this.bringsLogin} sendHome={this.handlesHomeButtom}/>
+        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick} showForms={this.bringsLogin} sendHome={this.handlesHomeButtom} showEdit={this.handlesEdit}/>
 
     <Route exact path="/" render={ () => {
         return (
           <Fragment>
             <div className="AppBody">
-
 
               <TranslateContainer
                 currentState={this.state}
@@ -193,11 +209,15 @@ class MainContainer extends Component {
                 makesPhrase= {this.handleCreatePhrase}
               />
 
-
               { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser} onDelete={this.handleDelete}/>  :  null  }
             </div>
           </Fragment>
         )
+      }}/>
+
+
+      <Route exact path="/edit" render={ () => {
+        return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
       }}/>
 
     <Route exact path="/login" render={ () => {

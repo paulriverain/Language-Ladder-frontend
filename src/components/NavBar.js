@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import '../navbar.css'
 // import LoginSignUp from '../containers/LoginSignUp.js'
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -23,10 +23,11 @@ showsLoginForm=() => {
 
 toMainPage = () => {
   this.props.sendHome()
-
 }
 
-
+toEdit = () => {
+  this.props.showEdit()
+}
 
 
 // //change between hello in diff Languages
@@ -77,8 +78,10 @@ render () {
         <div className="topnav-centered">
         <a className="active" >Hello {this.props.currentUser.username}</a>
         </div>
+
         <div className="topnav-right">
-          <a >Edit Profile</a>
+          <a onClick={this.toEdit}>Edit Profile</a>
+
           <button type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>LOG OUT</h3></button>
         </div>
       </Fragment>

@@ -22,8 +22,8 @@ render () {
   <div className="flipcardholder">
     <FlipCard>
       <div className="messageFlip">
-        <p><h3>Language: <i>{this.props.phrase.language.lang_name}</i></h3>
-         {this.props.phrase.new_message}</p>
+        <h3>Language: <i>{this.props.phrase.language.lang_name}</i></h3>
+        <p> {this.props.phrase.new_message}</p>
       </div>
 
       <div className="messageFlip">
