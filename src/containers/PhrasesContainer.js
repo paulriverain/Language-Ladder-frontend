@@ -1,39 +1,41 @@
 import React, { Component } from 'react';
 import PhraseCard from '../components/PhraseCard.js'
 import TestFlip from '../components/TestFlip.js'
+import SelectFilter from '../components/SelectFilter.js'
 
 
 class PhrasesContainer extends Component {
 state = {
-  learnClick: false
+  flashCardClick: false
 }
 
 handleLearn = () =>{
-  this.setState({learnClick: !this.state.learnClick})
+  this.setState({flashCardClick: !this.state.flashCardClick})
 }
 
 
-
-
-
 render () {
-  console.log(this.state.learnClick);
   const onePhrase = this.props.phrases.map(phrase => {
     return <PhraseCard phrase={phrase} key={phrase.id} onDelete={this.props.onDelete}/>
-   })
+  })
 
-   const learnPhrase = this.props.phrases.map(phrase => {
+  const learnPhraseFlash = this.props.phrases.map(phrase => {
      return <TestFlip phrase={phrase} key={phrase.id} onDelete={this.props.onDelete}/>
-    })
+  })
+
+  //sets up filter function
+  const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang}/>
 
   return(
     <div className="App">
       <div className='PhraseContainer'>
 
       <h2><i><u>Saved Phrases</u></i></h2>
-      <p><button onClick={this.handleLearn}>Test Mode{this.state.learnClick ? <p>On</p> : <p>Off</p>}</button></p>
+      <p><button onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
+      {chooseFilter}
+      </p>
 
-        {this.state.learnClick ? learnPhrase : onePhrase}
+      {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
 
       </div>
     </div>

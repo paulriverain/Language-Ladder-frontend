@@ -19,7 +19,8 @@ class MainContainer extends Component {
     currentUser: null,
     currentLang: "",
     orMess: "",
-    trMess: ""
+    trMess: "",
+    filterLang: "All Languages..."
   }
 
 //-------------------------------------------------------------------------
@@ -58,11 +59,11 @@ class MainContainer extends Component {
 // Login, create,  logout Callback functions------------------------------
 
   handleLogin = (loginInfo) =>{
-    // console.log("LOGIN INFO IS", loginInfo)
-      localStorage.setItem("token", loginInfo.token)
-      this.setState({currentUser: loginInfo})
-      this.props.history.push("/")
-    }
+    localStorage.setItem("token", loginInfo.token)
+    this.setState({currentUser: loginInfo})
+    this.props.history.push("/")
+  }
+
   handleLogoutClick = ()=>{
     localStorage.removeItem("token")
     this.setState({currentUser: null})
@@ -88,14 +89,14 @@ class MainContainer extends Component {
 //for Edit ------------------------------------------------------------------
 
 handlesEdit = () => {
-  console.log('hit the main for Edit');
+  // console.log('hit the main for Edit');
   this.props.history.push("/edit")
 }
+
 updateCurretUser = (updatedUser) =>{
-  console.log('hit the main for changing user state   ',   updatedUser);
+  // console.log('hit the main for changing user state   ',   updatedUser);
   console.log(this.state.currentUser);
   alert(updatedUser.message)
-
   this.setState({currentUser: {...this.state.currentUser, username: updatedUser.user.username}})
 }
 
@@ -139,24 +140,20 @@ updateCurretUser = (updatedUser) =>{
 
   handleCreatePhrase = () =>{
   // console.log('Hits the save phrase in main', this.state.currentLang);
-
   let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
-
-  // console.log(thisCode[0].id);
-  // console.log(this.state.currentUser.id);
-    fetch('http://localhost:3000/api/v1/phrases', {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: this.state.currentUser.id,
-        language_id: thisCode[0].id,
-        user_message: this.state.orMess,
-        new_message: this.state.trMess
-      })
+  fetch('http://localhost:3000/api/v1/phrases', {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      user_id: this.state.currentUser.id,
+      language_id: thisCode[0].id,
+      user_message: this.state.orMess,
+      new_message: this.state.trMess
     })
+  })
     .then(resp => resp.json())
     .then(newphrase => {
         this.setState({phrases: [newphrase, ...this.state.phrases]}, () => console.log(this.state.phrases))
@@ -178,7 +175,17 @@ updateCurretUser = (updatedUser) =>{
     .then(response => alert(response.message))
   }
 
+//----------------------------------------------------------------------------
+//for Filtering Phrases-------------------------------------------------------
 
+
+handlesFilterLanguage = (e) => {
+  console.log(e.target.value);
+  console.log('Hit main filter land handler', console.log(e.target.value));
+  this.setState({filterLang: e.target.value})
+
+
+}
 
 
 
@@ -187,44 +194,65 @@ updateCurretUser = (updatedUser) =>{
 //-----------------------------------------------------------------
 
   render () {
+
+
     const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
 
-    console.log(this.state);
+    console.log(userPhrases);
+
     return(
 
   <Fragment>
-        <HeaderNav currentUser={this.state.currentUser} onLogout={this.handleLogoutClick} showForms={this.bringsLogin} sendHome={this.handlesHomeButtom} showEdit={this.handlesEdit}/>
+
+    <HeaderNav
+      currentUser={this.state.currentUser}
+      onLogout={this.handleLogoutClick}
+      showForms={this.bringsLogin}
+      sendHome={this.handlesHomeButtom}
+      showEdit={this.handlesEdit}
+    />
 
     <Route exact path="/" render={ () => {
-        return (
-          <Fragment>
-            <div className="AppBody">
+      return (
+        <Fragment>
+          <div className="AppBody">
 
-              <TranslateContainer
-                currentState={this.state}
-                onType={this.handleOrgMess}
-                selectLang={this.handleLang}
-                afterSub={this.state.trMess}
-                forSubmit={this.handleSubmit}
-                makesPhrase= {this.handleCreatePhrase}
-              />
+            <TranslateContainer
+              currentState={this.state}
+              onType={this.handleOrgMess}
+              selectLang={this.handleLang}
+              afterSub={this.state.trMess}
+              forSubmit={this.handleSubmit}
+              makesPhrase= {this.handleCreatePhrase}
+            />
 
-              { this.state.currentUser ?  <PhrasesContainer phrases={userPhrases} currentUser={this.state.currentUser} onDelete={this.handleDelete}/>  :  null  }
-            </div>
-          </Fragment>
-        )
-      }}/>
+            { this.state.currentUser ?
+              <PhrasesContainer
+                phrases={userPhrases.filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")}
 
+                currentUser={this.state.currentUser}
+                selectLang={this.handlesFilterLanguage}
+                allLang={this.state.languages}
+                onDelete={this.handleDelete}/>
+              :  null  }
 
-      <Route exact path="/edit" render={ () => {
-        return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
-      }}/>
+          </div>
+        </Fragment>
+      )
+    }}/>
+
+    <Route exact path="/edit" render={ () => {
+      return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
+    }}/>
 
     <Route exact path="/login" render={ () => {
         return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}/>
     }}/>
+
   </Fragment>
+
     );
+
   }
 }
 
