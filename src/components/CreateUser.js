@@ -27,7 +27,7 @@ class CreateUser extends Component {
     .then(resp => resp.json())
     .then(signUp => {
       if (signUp.error) {
-        alert("That Username already exists!")
+        alert("Username or Password already exists or is invalid.")
       }
       else {
         this.props.onCreateUser(signUp)
@@ -41,13 +41,13 @@ class CreateUser extends Component {
     }))
   }
 
+  // Create Bio:<input type="text"  placeholder="new boo" name="bio" value={this.state.bio} onChange={this.handleChange}/><br />
   render(){
     return (
       <div className="SigningHolder">
         <p><b>Create Account</b></p>
         <form onSubmit={this.createNewUser}>
           Create Username:<input type="text"  placeholder="New Username" name="username" value={this.state.username} onChange={this.handleChange}/><br />
-          Create Bio:<input type="text"  placeholder="new boo" name="bio" value={this.state.bio} onChange={this.handleChange}/><br />
           Create Password: <input type="password"  placeholder="new password" name="password" value={this.state.password} onChange={this.handleChange}/><br />
           <input type="submit" value="Submit"/>
         </form>

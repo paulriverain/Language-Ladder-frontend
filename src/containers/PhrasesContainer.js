@@ -15,6 +15,8 @@ handleLearn = () =>{
 
 
 render () {
+
+
   const onePhrase = this.props.phrases.map(phrase => {
     return <PhraseCard phrase={phrase} key={phrase.id} onDelete={this.props.onDelete}/>
   })
@@ -31,11 +33,22 @@ render () {
       <div className='PhraseContainer'>
 
       <h2><i><u>Saved Phrases</u></i></h2>
-      <p><button onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
-      {chooseFilter}
-      </p>
 
-      {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
+      {onePhrase.length === 0 ?
+
+        <p>----  No Saved Phrases  ----</p>
+
+        :
+
+        <div>
+        <p><button onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
+        {chooseFilter}
+        </p>
+
+        {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
+        </div>
+
+      }
 
       </div>
     </div>

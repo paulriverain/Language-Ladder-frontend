@@ -156,7 +156,9 @@ updateCurretUser = (updatedUser) =>{
   })
     .then(resp => resp.json())
     .then(newphrase => {
+      console.log(newphrase);
         this.setState({phrases: [newphrase, ...this.state.phrases]}, () => console.log(this.state.phrases))
+        alert("Translation Successfully Saved!")
     })
   }
 
@@ -180,8 +182,8 @@ updateCurretUser = (updatedUser) =>{
 
 
 handlesFilterLanguage = (e) => {
-  console.log(e.target.value);
-  console.log('Hit main filter land handler', console.log(e.target.value));
+  // console.log(e.target.value);
+  // console.log('Hit main filter land handler', console.log(e.target.value));
   this.setState({filterLang: e.target.value})
 
 

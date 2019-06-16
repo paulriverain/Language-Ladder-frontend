@@ -31,8 +31,8 @@
 }
 
 .TranslateContainer {
-  border-style: dashed;
-  border-color: red;
+  /* border-style: dashed; */
+  /* border-color: red; */
   text-align: center;
   width: 80%;
   margin-right: 10%;
@@ -44,8 +44,8 @@
   padding-left: 30%;
   padding-right: 30%;
   align-items: center;
-  border-style: dashed;
-  border-color: blue;
+  /* border-style: dashed; */
+  /* border-color: blue; */
 }
 
 .PhraseContainer{
