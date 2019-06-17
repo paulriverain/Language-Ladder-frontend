@@ -51,11 +51,16 @@ class EditUser extends Component {
 
 
   render () {
+
     return(
       <div className="App">
-        <h1>HI</h1>
 
-        { !this.state.editUser ? <button onClick={this.showEditForm}>get users</button> : null }
+      <br />
+      <br />
+        <h1>More features coming soon</h1>
+      <br />
+
+        { !this.state.editUser ? <button onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
 
         { this.state.editUser ?
           <form onSubmit={this.editSubmit}>

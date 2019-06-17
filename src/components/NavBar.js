@@ -44,10 +44,6 @@ toEdit = () => {
 // }
 
 
-
-
-
-
 render () {
 
   return(
@@ -65,8 +61,6 @@ render () {
           </div>
 
 
-
-
         </Fragment>
 
           :
@@ -80,26 +74,14 @@ render () {
         </div>
 
         <div className="topnav-right">
-          <a onClick={this.toEdit}>Edit Profile</a>
+          <a onClick={this.toEdit}>Profile</a>
 
           <button type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>LOG OUT</h3></button>
         </div>
       </Fragment>
       }
 
-
-
-
  </div>
-
-
-
-
-
-
-
-
-
 
     )
   }

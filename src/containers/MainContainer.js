@@ -4,7 +4,10 @@ import TranslateContainer from './TranslateContainer.js'
 import LoginSignUp from './LoginSignUp.js'
 import PhrasesContainer from './PhrasesContainer.js'
 import EditUser from '../components/EditUser.js'
-import { Route, withRouter } from 'react-router-dom';
+import TestMode from '../components/TestMode.js'
+
+import { Route, withRouter, Switch } from 'react-router-dom';
+
 
 // import OrgMessage from '../components/messageBoxes/OrgMessage.js'
 // import TransMessage from '../components/messageBoxes/TransMessage.js'
@@ -20,7 +23,9 @@ class MainContainer extends Component {
     currentLang: "",
     orMess: "",
     trMess: "",
-    filterLang: "All Languages..."
+    filterLang: "All Languages...",
+    testModeClick: false
+
   }
 
 //-------------------------------------------------------------------------
@@ -186,10 +191,15 @@ handlesFilterLanguage = (e) => {
   // console.log('Hit main filter land handler', console.log(e.target.value));
   this.setState({filterLang: e.target.value})
 
-
 }
 
+//----------------------------------------------------------------------------
+//for Test Mode Phrases-------------------------------------------------------
 
+handleTest = () => {
+    this.props.history.push("/test")
+
+}
 
 //-----------------------------------------------------------------
 //renders page-----------------------------------------------------
@@ -199,8 +209,7 @@ handlesFilterLanguage = (e) => {
 
 
     const userPhrases = this.state.currentUser ? this.state.phrases.filter(phrase =>{return (phrase.user_id === this.state.currentUser.id)}) : null
-
-    console.log(userPhrases);
+console.log(this.state.currentUser);
 
     return(
 
@@ -214,28 +223,76 @@ handlesFilterLanguage = (e) => {
       showEdit={this.handlesEdit}
     />
 
-    <Route exact path="/" render={ () => {
+
+    <Switch>
+    <Route exact path="/edit" render={ () => {
+      return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
+    }}/>
+
+    <Route exact path="/login" render={ () => {
+      return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}/>
+    }}/>
+
+
+
+
+  { this.state.currentUser ? <Route path="/test" render={ () => {
       return (
         <Fragment>
           <div className="AppBody">
 
-            <TranslateContainer
-              currentState={this.state}
-              onType={this.handleOrgMess}
-              selectLang={this.handleLang}
-              afterSub={this.state.trMess}
-              forSubmit={this.handleSubmit}
-              makesPhrase= {this.handleCreatePhrase}
+          <TranslateContainer
+            currentState={this.state}
+            onType={this.handleOrgMess}
+            selectLang={this.handleLang}
+            afterSub={this.state.trMess}
+            forSubmit={this.handleSubmit}
+            makesPhrase= {this.handleCreatePhrase}
+          />
+
+            <TestMode
+            phrases={userPhrases.filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")}
+              currentUser={this.state.currentUser}
+              selectLang={this.handlesFilterLanguage}
+              allLang={this.state.languages}
+              onDelete={this.handleDelete}
+              handleTest={this.handlesHomeButtom}
+
             />
+
+          </div>
+        </Fragment>
+      )
+    }}/>: null}
+
+
+
+
+
+    <Route path="/" render={ () => {
+      return (
+        <Fragment>
+          <div className="AppBody">
+
+          <TranslateContainer
+            currentState={this.state}
+            onType={this.handleOrgMess}
+            selectLang={this.handleLang}
+            afterSub={this.state.trMess}
+            forSubmit={this.handleSubmit}
+            makesPhrase= {this.handleCreatePhrase}
+          />
 
             { this.state.currentUser ?
               <PhrasesContainer
                 phrases={userPhrases.filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")}
-
                 currentUser={this.state.currentUser}
                 selectLang={this.handlesFilterLanguage}
                 allLang={this.state.languages}
-                onDelete={this.handleDelete}/>
+                onDelete={this.handleDelete}
+                testModeClick = {this.state.testModeClick}
+                handleTest={this.handleTest}
+              />
               :  null  }
 
           </div>
@@ -243,14 +300,7 @@ handlesFilterLanguage = (e) => {
       )
     }}/>
 
-    <Route exact path="/edit" render={ () => {
-      return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
-    }}/>
-
-    <Route exact path="/login" render={ () => {
-        return  <LoginSignUp onCreateUser={this.handlesCreateUser} onLogin={this.handleLogin}/>
-    }}/>
-
+</Switch>
   </Fragment>
 
     );

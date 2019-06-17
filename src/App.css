@@ -91,8 +91,12 @@
 }
 
 .deletePhrase{
-
   float: right;
   padding-right: 4px;
+}
 
+.item {
+  justify-content: space-evenly;
+  display: flex;
+  flex-grow: 2; /* default 0 */
 }
