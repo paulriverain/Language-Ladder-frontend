@@ -72,6 +72,7 @@ class MainContainer extends Component {
   handleLogoutClick = ()=>{
     localStorage.removeItem("token")
     this.setState({currentUser: null})
+    this.setState({trMess: ""})
     this.props.history.push("/")
   }
 
