@@ -34,29 +34,34 @@ render () {
 
 
   //sets up filter function
-  const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang}/>
+  const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang} filterLang={this.props.filterLang}/>
 
   return(
     <div className="App">
       <div className='PhraseContainer'>
-      <Fragment>
+        <Fragment>
+          <h2><i><u>Saved Phrases</u></i></h2>
+          <div className="item">
+            <button onClick={this.handleTest}>Test Mode</button>
+            <br /> <br />
+            {chooseFilter}
 
-      <h2><i><u>Saved Phrases</u></i></h2>
+            {onePhrase.length > 0 ?
 
-      <button onClick={this.handleTest}>Test Mode</button>
-      <br /> <br />
-      {chooseFilter}
-      <br />
-       <Fragment>
-        {onePhrase.length === 0 ? <p>----  No Saved Phrases  ----</p> :
-          <div>
-            <p><button onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button></p>
-            {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
+              <button onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
+
+            : null }
+
           </div>
-        }
-        </Fragment>
+          <br />
 
-
+          <Fragment>
+            {onePhrase.length === 0 ? <p>----  No Saved Phrases  ----</p> :
+              <Fragment>
+                {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
+              </Fragment>
+            }
+          </Fragment>
         </Fragment>
       </div>
     </div>

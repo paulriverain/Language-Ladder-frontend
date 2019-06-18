@@ -112,22 +112,28 @@ updateCurretUser = (updatedUser) =>{
   handleLang = (e) => {
     console.log(e.target.value);
     this.setState({currentLang: e.target.value})
+    this.setState({trMess: ""})
   }
 
   handleOrgMess = (e) =>{
     console.log(e.target.value);
     this.setState({orMess: e.target.value})
+    this.setState({trMess: ""})
   }
 
 
   handleTranMess = () =>{
+    console.log("passes what state here?:", this.state);
     fetch('http://localhost:3000/api/v1/phrases/translate',{
       method: "POST",
       headers:{
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({
+        orMess: this.state.orMess,
+        currentLang: this.state.currentLang
+      })
     })
     .then(resp => resp.json())
     .then(translated => this.setState({trMess: translated.message.text}, () => console.log(translated)))
@@ -146,6 +152,7 @@ updateCurretUser = (updatedUser) =>{
   handleCreatePhrase = () =>{
   // console.log('Hits the save phrase in main', this.state.currentLang);
   let thisCode = this.state.currentLang ? this.state.languages.filter( language => {return (language.lang_code === this.state.currentLang)}): null
+  console.log(this.state.trMess);
   fetch('http://localhost:3000/api/v1/phrases', {
     method: "POST",
     headers:{
@@ -257,7 +264,7 @@ console.log(this.state.currentUser);
               allLang={this.state.languages}
               onDelete={this.handleDelete}
               handleTest={this.handlesHomeButtom}
-
+              filterLang = {this.state.filterLang}
             />
 
           </div>
@@ -292,6 +299,7 @@ console.log(this.state.currentUser);
                 onDelete={this.handleDelete}
                 testModeClick = {this.state.testModeClick}
                 handleTest={this.handleTest}
+                filterLang = {this.state.filterLang}
               />
               :  null  }
 

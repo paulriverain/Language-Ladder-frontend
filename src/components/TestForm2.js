@@ -28,11 +28,7 @@ coolFunction = () =>{
 
       <div>
         <input type=""  placeholder="Answer" name="answer" onChange={this.handleChange} />
-        { this.coolFunction() ?
-           <h1>Correct!!!!!</h1>
-          :
-          null
-        }
+        { this.coolFunction() ? <h4>Correct!!!!!</h4>  : null }
       </div>
     )
   }

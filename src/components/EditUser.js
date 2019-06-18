@@ -13,45 +13,47 @@ class EditUser extends Component {
 
   handleNameChange = (e) =>{
     e.persist();
-    console.log('hit change');
     this.setState({newUsername: e.target.value})
   }
 
   handlePWChange = (e) =>{
     e.persist();
-    console.log('hit change');
     this.setState({newPassword: e.target.value})
   }
 
 
   editSubmit = (e) => {
     e.preventDefault()
+    if(this.state.newUsername === "" && this.state.newUsername === ""){
+        alert("New Username or Password can't be blank.")
+    } else {
+      console.log("in the update fetch");
 
-    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`,{
-      method: 'PATCH',
-      headers:{
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        username: this.state.newUsername,
-        password: this.state.newPassword
+      fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`,{
+        method: 'PATCH',
+        headers:{
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.newUsername,
+          password: this.state.newPassword
+        })
       })
-    })
-    .then(resp => resp.json())
-    .then(updatedUser =>
-      this.props.updateUser(updatedUser),
-    )
-
+      .then(resp => resp.json())
+      .then(updatedUser =>
+        this.props.updateUser(updatedUser),
+      )
+    }
   }
 
   showEditForm = () =>{
     this.setState({editUser: !this.state.editUser})
+    this.setState({newUsername: this.props.currentUser.username})
   }
 
 
   render () {
-
     return(
       <div className="App">
 
@@ -64,7 +66,7 @@ class EditUser extends Component {
 
         { this.state.editUser ?
           <form onSubmit={this.editSubmit}>
-            Edit Username:<input type="text"  placeholder={this.props.currentUser.username} name="username"  onChange={this.handleNameChange}/><br />
+            Edit Username:<input type="text" lable="Edit Username" defaultValue={this.props.currentUser.username} name="username"  onChange={this.handleNameChange}/><br />
 
             Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br />
             <input type="submit" value="Submit"/>

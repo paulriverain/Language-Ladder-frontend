@@ -23,7 +23,7 @@ render () {
   console.log(this.props);
 // .filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")
 
-  const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang}/>
+  const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang} filterLang={this.props.filterLang}/>
 
   const testCard = this.props.phrases.map(phrase => {
     return <TestCard phrase={phrase} key={phrase.id} onDelete={this.props.onDelete} hiddenBtn={this.state.hidden}/>
@@ -34,13 +34,16 @@ render () {
       <div className='PhraseContainer'>
 
         <div>
-          <h3><i><u>Language Barrier? Let us help you get you over it!</u></i></h3>
-          <button onClick={this.handleTest}>Exit Test Mode</button>
-          <br />    <br />
-          {chooseFilter}
-          <br />
+          <h3><i><u>Language Barrier?</u></i></h3>
+          <h3><i><u>Let us help you get you over it!</u></i></h3><br />
+          <div className= "item">
+            <button onClick={this.handleTest}>Exit Test Mode</button>
+            <br />    <br />
+            {chooseFilter}
+            <br />
 
-          <button onClick={this.handleSwitch}>{this.state.hidden ? <p>Hide Right</p> : <p>Hide Left</p>}</button>
+            <button onClick={this.handleSwitch}>{this.state.hidden ?  <p>Hide Left</p> : <p>Hide Right</p>}</button>
+          </div> <br />
           <div className="Columns">
             {testCard}
           </div>

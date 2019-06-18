@@ -8,28 +8,21 @@ class TestCard extends Component {
 render () {
 
   console.log(this.props);
-  const formInput1 = <TestForm1 info={this.props.phrase}/>
-  const formInput2 = <TestForm2 info={this.props.phrase}/>
+  const formInputOrg = <TestForm1 info={this.props.phrase}/>
+  const formInputLang = <TestForm2 info={this.props.phrase}/>
   return(
   <Fragment>
 
     <div className="item">
       <div className="OrgColumn">
         <h4>Original Language</h4>
-        <p>{this.props.hiddenBtn ?
-
-          this.props.phrase.user_message : formInput1
-        }</p>
+        {this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }
 
       </div>
 
       <div className="LangColumn">
-        <h4>In {this.props.phrase.language.lang_name}</h4>
-
-        <p>{!this.props.hiddenBtn ?
-
-          this.props.phrase.new_message : formInput2
-        }</p>
+        <h4>{this.props.phrase.language.lang_name}</h4>
+        {!this.props.hiddenBtn ? this.props.phrase.new_message : formInputLang }
       </div>
     </div>
     <h1>- - - - - - - - - - - - - - - - - - -</h1>

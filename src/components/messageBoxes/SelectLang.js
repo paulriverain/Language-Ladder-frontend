@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 
 
 class SelectLang extends Component {
-  // state = {
-  //   languages: []
-  // }
-
-
-  // componentDidMount(){
-  //   fetch('http://localhost:3000/api/v1/languages')
-  //   .then(res => res.json())
-  //   .then(languages => this.setState({languages: languages}))
-  // }
 
   render () {
     console.log(this.props.currentState);

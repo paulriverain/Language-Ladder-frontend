@@ -50,6 +50,7 @@ class TranslateContainer extends Component {
   // }
 
   render () {
+    console.log(this.props);
     return(
       <div className='TranslateContainer'>
         <h1>Translate Here</h1>
@@ -70,6 +71,7 @@ class TranslateContainer extends Component {
             null
           :
           <div>
+            
             {this.props.afterSub === "" || this.props.onType === "" || this.props.selectLang === "" ? null : <button onClick={this.props.makesPhrase}>Save Phrases</button>}
           </div>
         }
