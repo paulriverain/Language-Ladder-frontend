@@ -13,12 +13,12 @@ render () {
   return(
       <Fragment>
         <div className="phraseCard">
-        
+
           <div className="item">
 
             <div className="OrgColumn">
             <br />
-              <h4>Original Language</h4>
+              <h4>Original text</h4>
               <p>{this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }</p>
             </div>
 
