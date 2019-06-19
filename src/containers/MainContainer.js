@@ -123,27 +123,33 @@ updateCurretUser = (updatedUser) =>{
   }
 
 
-  handleTranMess = () =>{
-    console.log("passes what state here?:", this.state);
-    fetch('http://localhost:3000/api/v1/phrases/translate',{
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        orMess: this.state.orMess,
-        currentLang: this.state.currentLang
+  handleSubmit = (e) =>{
+      e.preventDefault()
+
+    if (this.state.orMess === ""){
+      alert("Invalid input")
+    } else if(this.state.currentLang === ""){
+        alert("Invalid input")
+    } else{
+      console.log("passes what state here?:", this.state);
+      fetch('http://localhost:3000/api/v1/phrases/translate',{
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          orMess: this.state.orMess,
+          currentLang: this.state.currentLang
+        })
       })
-    })
-    .then(resp => resp.json())
-    .then(translated => this.setState({trMess: translated.message.text}, () => console.log(translated)))
+      .then(resp => resp.json())
+      .then(translated => this.setState({trMess: translated.message.text}, () => console.log(translated)))
+
+    }
   }
 
-  handleSubmit = (e) =>{
-    e.preventDefault()
-    this.handleTranMess()
-  }
+
 
 
 

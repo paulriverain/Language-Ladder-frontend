@@ -13,7 +13,6 @@ class PhraseCard extends Component {
 
 
 render () {
-  console.log(this.props.phrase.language.lang_name);
   return(
     <div className="phraseCard">
       <div className='deletePhrase'>

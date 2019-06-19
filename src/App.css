@@ -100,3 +100,9 @@
   display: flex;
   flex-grow: 2; /* default 0 */
 }
+
+.ladderSpin{
+  float: left;
+  padding-left: 4px;
+  padding-top: 4px;
+}

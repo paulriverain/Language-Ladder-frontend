@@ -5,10 +5,10 @@ class TransMessage extends Component {
 render () {
 
   return(
-    <Fragment>
+    <div>
       <h4>Translated Message</h4>
-      <textarea maxLength="12" value={this.props.afterSub}></textarea>
-    </Fragment>
+      <h5><textarea maxLength="12" cols="20" value={this.props.afterSub}></textarea></h5>
+    </div>
     )
   }
 }

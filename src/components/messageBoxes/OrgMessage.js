@@ -5,10 +5,10 @@ class OrgMessage extends Component {
 render () {
 
   return(
-    <Fragment>
+    <div>
       <h4>Original Message</h4>
-      <textarea maxLength="10" onChange={this.props.onType}></textarea>
-    </Fragment>
+      <h5><textarea maxLength="10" row="10" cols="20" onChange={this.props.onType}></textarea></h5>
+    </div>
     )
   }
 }

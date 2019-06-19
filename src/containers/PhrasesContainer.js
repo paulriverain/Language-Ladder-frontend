@@ -3,11 +3,12 @@ import PhraseCard from '../components/PhraseCard.js'
 import TestFlip from '../components/TestFlip.js'
 import SelectFilter from '../components/SelectFilter.js'
 // import TestMode from '../components/TestMode.js'
-import { Route, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class PhrasesContainer extends Component {
 state = {
-  flashCardClick: false
+  flashCardClick: false,
+  loadedCards: 10
 }
 
 
@@ -20,8 +21,18 @@ handleTest = () => {
     this.props.handleTest()
 }
 
-render () {
 
+handlesBackLoad = () =>{
+  console.log('load the previous 10');
+  this.setState({loadedCards: (this.state.loadedCards -10)})
+}
+handlesNextLoad = () =>{
+  console.log('load the following 10');
+  this.setState({loadedCards: (this.state.loadedCards +10)})
+}
+
+
+render () {
 
   const onePhrase = this.props.phrases.map(phrase => {
     return <PhraseCard phrase={phrase} key={phrase.id} onDelete={this.props.onDelete}/>
@@ -59,7 +70,13 @@ render () {
             {onePhrase.length === 0 ? <p>----  No Saved Phrases  ----</p> :
               <Fragment>
                 {this.state.flashCardClick ? learnPhraseFlash : onePhrase}
+
+                <Fragment>
+                  <button onClick={this.handlesBackLoad}> back </button><button onClick={this.handlesNextLoad}> next </button>
+                </Fragment>
+
               </Fragment>
+
             }
           </Fragment>
         </Fragment>
