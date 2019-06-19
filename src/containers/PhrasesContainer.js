@@ -71,10 +71,10 @@ render () {
           <br />
           <h2><i><u>Saved Phrases</u></i></h2>
 
-          <br />
-          {chooseFilter}<br />
+          {onePhrase.length > 0 ?<div>{chooseFilter}<br />  </div>: null }
+
           <div className="item">
-            <button className="ui button" onClick={this.handleTest}>Test Mode</button>
+            {onePhrase.length > 0 ?<button className="ui button" onClick={this.handleTest}>Test Mode</button>  : null }
             <br /> <br />
 
             {onePhrase.length > 0 ?
@@ -87,7 +87,7 @@ render () {
           <br />
 
           <Fragment>
-            {onePhrase.length === 0 ? <p>----  No Saved Phrases  ----</p> :
+            {onePhrase.length === 0 ? <div><p>----  No Saved Phrases  ----</p> <br /></div>:
               <Fragment>
                 {this.state.flashCardClick ? learnPhraseFlash : onePhrase.slice(this.state.loadedCards-10, this.state.loadedCards)}
 
