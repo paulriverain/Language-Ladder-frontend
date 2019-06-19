@@ -67,16 +67,16 @@ render () {
 
       <Fragment>
         <div>
-        <a  onClick={this.toMainPage}>Home</a>
+        <a  onClick={this.toMainPage}><h3>Home</h3></a>
         </div>
         <div className="topnav-centered">
-        <a className="active" >Hello {this.props.currentUser.username}</a>
+        <a className="active" > <h3>Hello {this.props.currentUser.username}</h3></a>
         </div>
 
         <div className="topnav-right">
-          <a onClick={this.toEdit}>Profile</a>
+          <a onClick={this.toEdit}><h3>Profile</h3></a>
 
-          <button type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>LOG OUT</h3></button>
+          <a type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>Log Out</h3></a>
         </div>
       </Fragment>
       }

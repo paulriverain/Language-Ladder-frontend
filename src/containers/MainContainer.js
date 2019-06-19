@@ -5,7 +5,7 @@ import LoginSignUp from './LoginSignUp.js'
 import PhrasesContainer from './PhrasesContainer.js'
 import EditUser from '../components/EditUser.js'
 import TestMode from '../components/TestMode.js'
-
+import 'semantic-ui/dist/semantic.min.css';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
 
@@ -240,7 +240,7 @@ console.log(this.state.currentUser);
 
     <Switch>
     <Route exact path="/edit" render={ () => {
-      return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser}/>
+      return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser} onLogout={this.handleLogoutClick}/>
     }}/>
 
     <Route exact path="/login" render={ () => {
@@ -253,7 +253,7 @@ console.log(this.state.currentUser);
   { this.state.currentUser ? <Route path="/test" render={ () => {
       return (
         <Fragment>
-          <div className="AppBody">
+          <div className="AppBody"><br /><br />
 
           <TranslateContainer
             currentState={this.state}
@@ -262,7 +262,7 @@ console.log(this.state.currentUser);
             afterSub={this.state.trMess}
             forSubmit={this.handleSubmit}
             makesPhrase= {this.handleCreatePhrase}
-          />
+          /><br /><br />
 
             <TestMode
             phrases={userPhrases.filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")}
@@ -286,7 +286,7 @@ console.log(this.state.currentUser);
     <Route path="/" render={ () => {
       return (
         <Fragment>
-          <div className="AppBody">
+          <div className="AppBody"><br /><br />
 
           <TranslateContainer
             currentState={this.state}
@@ -295,7 +295,7 @@ console.log(this.state.currentUser);
             afterSub={this.state.trMess}
             forSubmit={this.handleSubmit}
             makesPhrase= {this.handleCreatePhrase}
-          />
+          /><br /><br />
 
             { this.state.currentUser ?
               <PhrasesContainer

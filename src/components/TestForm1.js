@@ -16,20 +16,20 @@ class TestForm1 extends Component {
   coolFunction = () =>{
     const answer = this.state.answerForm.toLowerCase()
     const given = this.props.info.user_message.toLowerCase()
-
-  return answer === given
+    return answer === given
   }
 
 
 
   render () {
-    console.log(this.props.info.user_message);
-    console.log(this.state.answerForm);
+    // console.log(this.props.info.user_message);
+    // console.log(this.state.answerForm);
     return (
 
-      <div>
-        <input type=""  placeholder="Answer" name="answer" onChange={this.handleChange} />
-        {this.coolFunction() ? <h4>Correct!!!!!</h4>:null}
+      <div className="testFormBox">
+        <input className="ui form"  type=""  placeholder="Answer" name="answer" onChange={this.handleChange} />
+
+        {this.coolFunction() ? <h4>Correct!</h4>:null}
       </div>
     )
   }

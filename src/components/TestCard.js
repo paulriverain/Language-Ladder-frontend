@@ -11,22 +11,26 @@ render () {
   const formInputOrg = <TestForm1 info={this.props.phrase}/>
   const formInputLang = <TestForm2 info={this.props.phrase}/>
   return(
-  <Fragment>
+      <Fragment>
+        <div className="phraseCard">
+        
+          <div className="item">
 
-    <div className="item">
-      <div className="OrgColumn">
-        <h4>Original Language</h4>
-        {this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }
+            <div className="OrgColumn">
+            <br />
+              <h4>Original Language</h4>
+              <p>{this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }</p>
+            </div>
 
-      </div>
-
-      <div className="LangColumn">
-        <h4>{this.props.phrase.language.lang_name}</h4>
-        {!this.props.hiddenBtn ? this.props.phrase.new_message : formInputLang }
-      </div>
-    </div>
-    <h1>- - - - - - - - - - - - - - - - - - -</h1>
-    </Fragment>
+            <div className="LangColumn">
+            <br />
+              <h4>{this.props.phrase.language.lang_name}</h4>
+              <p>{!this.props.hiddenBtn ? this.props.phrase.new_message : formInputLang }</p><br />
+            </div>
+          </div>
+          <br />
+        </div>
+      </Fragment>
     )
   }
 }

@@ -48,9 +48,11 @@ class UserLogin extends Component {
     return (
       <Fragment>
       <div className="loginHolder">
-        <form onSubmit={this.handlesLoginFetch}>
+        <br />  <br />
+        <h2>Login</h2>
+        <form className="ui form" onSubmit={this.handlesLoginFetch}>
           First Name: <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleChange}/><br />
-          Password: <input type="password"  placeholder="password" name="password" value={this.state.password} onChange={this.handleChange}/><br />
+          Password: <input type="password"  placeholder="password" name="password" value={this.state.password} onChange={this.handleChange}/><br /><br />
           <input type="submit" value="Submit"/>
         </form>
       </div>

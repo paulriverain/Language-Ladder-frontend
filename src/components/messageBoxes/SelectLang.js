@@ -13,10 +13,11 @@ class SelectLang extends Component {
 
     return(
       <div className="dropdown">
-        <select onChange={this.props.selectLang}>
+
+        <select  onChange={this.props.selectLang}>
           <option defaultValue="">Languages...</option>
           {selectedLang}
-        </select>
+        </select>  <br />  <br />
       </div>
     )
   }

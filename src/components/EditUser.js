@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 class EditUser extends Component {
    state = {
      editUser: false,
-
      newUsername: '',
      newPassword: ''
-
-
    }
 
 
@@ -53,13 +50,29 @@ class EditUser extends Component {
   }
 
 
+
+  handlesDeleteUser = () => {
+    console.log(this.props.currentUser.id);
+    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`, {
+      method: "DELETE"
+    })
+    .then(resp=>resp.json())
+    .then(response =>
+      alert(response.message)
+    )
+    this.props.onLogout()
+  }
+
+
+
+
   render () {
     return(
       <div className="App">
 
       <br />
       <br />
-        <h1>More features coming soon</h1>
+        <h1>Edit Profile</h1>
       <br />
 
         { !this.state.editUser ? <button onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
@@ -71,7 +84,11 @@ class EditUser extends Component {
             Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br />
             <input type="submit" value="Submit"/>
           </form>
+
+
         : null }
+
+        <p><button className="ui button" onClick={this.handlesDeleteUser}>Delete Profile</button></p>
 
       </div>
       )

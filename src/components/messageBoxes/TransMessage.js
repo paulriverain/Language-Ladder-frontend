@@ -5,9 +5,9 @@ class TransMessage extends Component {
 render () {
 
   return(
-    <div>
-      <h4>Translated Message</h4>
-      <h5><textarea maxLength="12" cols="20" value={this.props.afterSub}></textarea></h5>
+    <div className="textAreaBoxes">
+      <h5>Translate Message</h5>
+      <textarea maxLength="12" row="10" cols="15" value={this.props.afterSub}></textarea>
     </div>
     )
   }

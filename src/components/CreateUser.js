@@ -44,13 +44,15 @@ class CreateUser extends Component {
   // Create Bio:<input type="text"  placeholder="new boo" name="bio" value={this.state.bio} onChange={this.handleChange}/><br />
   render(){
     return (
-      <div className="SigningHolder">
-        <p><b>Create Account</b></p>
-        <form onSubmit={this.createNewUser}>
+      <div className="loginHolder">
+        <br /><br />
+        <h2>Create Account</h2>
+        <form className="ui form" onSubmit={this.createNewUser}>
           Create Username:<input type="text"  placeholder="New Username" name="username" value={this.state.username} onChange={this.handleChange}/><br />
-          Create Password: <input type="password"  placeholder="new password" name="password" value={this.state.password} onChange={this.handleChange}/><br />
+          Create Password: <input type="password"  placeholder="new password" name="password" value={this.state.password} onChange={this.handleChange}/><br /> <br />
           <input type="submit" value="Submit"/>
         </form>
+        <br /><br />
       </div>
     );
   }

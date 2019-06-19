@@ -5,9 +5,9 @@ class OrgMessage extends Component {
 render () {
 
   return(
-    <div>
-      <h4>Original Message</h4>
-      <h5><textarea maxLength="10" row="10" cols="20" onChange={this.props.onType}></textarea></h5>
+    <div className="textAreaBoxes">
+      <h5>Original Message</h5>
+  <textarea maxLength="10" row="10" cols="15" onChange={this.props.onType}></textarea>
     </div>
     )
   }
