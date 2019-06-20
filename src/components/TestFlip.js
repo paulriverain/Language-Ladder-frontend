@@ -4,7 +4,6 @@ import FlipCard from 'react-flipcard-2';
 class TestFlip extends Component {
 
 invokesDelete = () =>{
-// console.log(this.props.phrase);
   const thisPhrase = this.props.phrase
   this.props.onDelete(thisPhrase)
 }

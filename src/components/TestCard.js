@@ -18,14 +18,14 @@ render () {
 
             <div className="OrgColumn">
             <br />
-              <h4>Original text</h4>
-              <p>{this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }</p>
+              <h3>Original Text</h3>
+              <h4>{this.props.hiddenBtn ? this.props.phrase.user_message : formInputOrg }</h4>
             </div>
 
             <div className="LangColumn">
             <br />
-              <h4>{this.props.phrase.language.lang_name}</h4>
-              <p>{!this.props.hiddenBtn ? this.props.phrase.new_message : formInputLang }</p><br />
+              <h3>{this.props.phrase.language.lang_name}</h3>
+              <h4>{!this.props.hiddenBtn ? this.props.phrase.new_message : formInputLang }</h4><br />
             </div>
           </div>
           <br />

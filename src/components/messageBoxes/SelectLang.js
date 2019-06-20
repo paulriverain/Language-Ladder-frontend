@@ -14,7 +14,7 @@ class SelectLang extends Component {
     return(
       <div className="dropdown">
 
-        <select  onChange={this.props.selectLang}>
+        <select className="ui fluid search dropdown" onChange={this.props.selectLang}>
           <option defaultValue="">Languages...</option>
           {selectedLang}
         </select>  <br />  <br />

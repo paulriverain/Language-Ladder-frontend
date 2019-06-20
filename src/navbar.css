@@ -1,13 +1,14 @@
 .topnav {
   position: relative;
-  background-color: #155648;
+  /* background-color: #155648; */
+  background-color: #379683;
   overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: #edf5e1;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -16,14 +17,16 @@
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #edf5e1;
+  color: #05386b;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #000000;
+  background-color: #05386b;
   color: white;
+  border-radius: 10px;
+
 }
 
 /* Centered section inside the top navigation */
@@ -53,4 +56,13 @@
     left: 0;
     transform: none;
   }
+}
+
+.ladderSpin{
+  float: left;
+  padding-left: 4px;
+  padding-top: 4px;
+    background-color: #edf5e1;
+    color: #05386b;
+    border: 2px  
 }

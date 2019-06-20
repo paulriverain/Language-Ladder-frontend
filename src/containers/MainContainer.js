@@ -128,9 +128,12 @@ updateCurretUser = (updatedUser) =>{
 
     if (this.state.orMess === ""){
       alert("Invalid input")
-    } else if(this.state.currentLang === ""){
+    } else if(this.state.currentLang === "Languages..."){
+        alert("Invalid input")
+    }else if(this.state.currentLang === ""){
         alert("Invalid input")
     } else{
+      
       console.log("passes what state here?:", this.state);
       fetch('http://localhost:3000/api/v1/phrases/translate',{
         method: "POST",

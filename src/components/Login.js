@@ -39,10 +39,8 @@ class UserLogin extends Component {
       password: ""
     }))
     console.log(this.props);
-    // this.props.history.push("/") ----route handled in MainContainer
   }
 
-// console.log(this.state)
   render(){
     console.log("PROPS THAT WE ARE INTERESTED IN", this.props)
     return (

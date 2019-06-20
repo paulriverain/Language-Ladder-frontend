@@ -72,22 +72,21 @@ class EditUser extends Component {
 
       <br />
       <br />
-        <h1>Edit Profile</h1>
       <br />
 
-        { !this.state.editUser ? <button onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
+        { !this.state.editUser ? <button className="ui primary button" onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
 
-        { this.state.editUser ?
-          <form onSubmit={this.editSubmit}>
+        { this.state.editUser ?<div className="loginHolder">
+          <form className="ui form" onSubmit={this.editSubmit}>
             Edit Username:<input type="text" lable="Edit Username" defaultValue={this.props.currentUser.username} name="username"  onChange={this.handleNameChange}/><br />
 
-            Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br />
+            Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br /><br />
             <input type="submit" value="Submit"/>
           </form>
-
+          </div>
 
         : null }
-
+        <br /><br />
         <p><button className="ui button" onClick={this.handlesDeleteUser}>Delete Profile</button></p>
 
       </div>

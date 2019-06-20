@@ -14,15 +14,26 @@ handlesSpin = () =>{
 }
 
 render () {
+  // <div className="appLogoHeader">
+  // <img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" alt="ladder logo" />
+  // </div>
   return(
 
     <div className="App">
       <div className="App-header">
+        <div className="w3-container w3-center w3-animate-opacity">
        <br />
+
+
         {this.state.ladderSpin ?
-          <h1><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" /> <b> <i>Language Ladder</i></b><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" /></h1>
+          <div>
+            <h1><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" /><b><i> Language Ladder </i></b></h1>
+          </div>
           :
-          <h1><b><i>Language Ladder</i></b></h1>
+          <div>
+            <br /><br /><br /><br /><br />
+            <h1><b><i>Language Ladder</i></b></h1>
+          </div>
         }
 
         <p><i>Climbing Over Language Barriers Since 2019</i></p><br />
@@ -31,10 +42,10 @@ render () {
 
         <NavBar currentUser={this.props.currentUser}  onLogout={this.props.onLogout} showForms={this.props.showForms} sendHome={this.props.sendHome}  showEdit={this.props.showEdit}/>
 
+      </div>
         <div className="ladderSpin">
-        <button className="ladderSpin" onClick={this.handlesSpin}>{this.state.ladderSpin ?  <p>Ladders off</p> : <p>Ladders on</p>}</button>
+          <button className="ladderSpin" onClick={this.handlesSpin}>{this.state.ladderSpin ?  <p>Ladder off</p> : <p>Ladder on</p>}</button>
         </div>
-
     </div>
     )
   }

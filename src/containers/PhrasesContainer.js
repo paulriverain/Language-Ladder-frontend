@@ -8,7 +8,7 @@ class PhrasesContainer extends Component {
 state = {
   flashCardClick: false,
   startCards: 0,
-  loadedCards: 10
+  loadedCards: 5
 }
 
 
@@ -23,20 +23,20 @@ handleTest = () => {
 
 
 handlesBackLoad = () =>{
-  console.log('load the previous 10');
+  console.log('load the previous 5');
     if (this.state.startCards > 0) {
       this.setState( prevState =>{
-        return {startCards: this.state.startCards -=10, loadedCards: this.state.loadedCards -=10}
+        return {startCards: this.state.startCards -=5, loadedCards: this.state.loadedCards -=5}
       })
     }
 }
 
 
 handlesNextLoad = () =>{
-  console.log('load the following 10');
-  if (this.state.loadedCards < this.props.phrases.length + 10) {
+  console.log('load the following 5');
+  if (this.state.loadedCards < this.props.phrases.length + 5) {
     this.setState(prevState =>{
-      return {startCards: this.state.startCards +=10, loadedCards: this.state.loadedCards +=10}
+      return {startCards: this.state.startCards +=5, loadedCards: this.state.loadedCards +=5}
 
     })
   }
@@ -59,55 +59,59 @@ render () {
   const chooseFilter = <SelectFilter languages={this.props.allLang} selectLang={this.props.selectLang} filterLang={this.props.filterLang}/>
 
 
-  const numShownCards = onePhrase.slice(this.state.loadedCards-10, this.state.loadedCards).length
+  const numShownCards = onePhrase.slice(this.state.loadedCards-5, this.state.loadedCards).length
 
-  console.log("onePhrase array? ", onePhrase.slice(this.state.loadedCards-10, this.state.loadedCards));
+  console.log("onePhrase array? ", onePhrase.slice(this.state.loadedCards-5, this.state.loadedCards));
 
 
   return(
     <div className="App">
-      <div className='PhraseContainer'>
-        <Fragment>
-          <br />
-          <h2><i><u>Saved Phrases</u></i></h2>
-
-          {onePhrase.length > 0 ?<div>{chooseFilter}<br />  </div>: null }
-
-          <div className="item">
-            {onePhrase.length > 0 ?<button className="ui button" onClick={this.handleTest}>Test Mode</button>  : null }
-            <br /> <br />
-
-            {onePhrase.length > 0 ?
-
-              <button className="ui button" onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
-
-            : null }
-
-          </div>
-          <br />
-
+      <div className="w3-container w3-center w3-animate-opacity">
+        <div className='PhraseContainer'>
           <Fragment>
-            {onePhrase.length === 0 ? <div><p>----  No Saved Phrases  ----</p> <br /></div>:
-              <Fragment>
-                {this.state.flashCardClick ? learnPhraseFlash : onePhrase.slice(this.state.loadedCards-10, this.state.loadedCards)}
+            <br />
+            <h2><i><u>Saved Phrases</u></i></h2>
 
+            <div>{chooseFilter}<br />  </div>
+
+            <div className="item">
+              {onePhrase.length > 0 ?<button className="ui button" onClick={this.handleTest}>Test Mode</button>  : null }
+              <br /> <br />
+
+              {onePhrase.length > 0 ?
+
+                <button className="ui button" onClick={this.handleLearn}>Flashcard Mode{this.state.flashCardClick ? <p>On</p> : <p>Off</p>}</button>
+
+              : null }
+
+            </div>
+            <br />
+
+            <Fragment>
+              {onePhrase.length === 0 ? <div><h4>----  No Saved Phrases  ----</h4> <br /></div>:
                 <Fragment>
+                  {this.state.flashCardClick ? learnPhraseFlash : onePhrase.slice(this.state.loadedCards-5, this.state.loadedCards)}
 
-                <br />
-                   <p>  {this.state.startCards > 0 ?  <button onClick={this.handlesBackLoad}> back </button> :null }
+                  <Fragment>
 
-                    -- showing {numShownCards} phrases out of {onePhrase.length} --
-
-                    {numShownCards < 10 ? null :<button onClick={this.handlesNextLoad}> next </button>} </p>
                   <br />
+                     <p>  {this.state.startCards > 0 ?  <button onClick={this.handlesBackLoad}> back page </button> :null }
+
+
+                      {numShownCards < 5 ? null :<button onClick={this.handlesNextLoad}> next page </button>} </p>
+                    <div className="totalCardCount">
+                    [{onePhrase.length}] Saved Phrases
+
+                    </div>
+                    <br />
+                  </Fragment>
 
                 </Fragment>
 
-              </Fragment>
-
-            }
+              }
+            </Fragment>
           </Fragment>
-        </Fragment>
+        </div>
       </div>
     </div>
     )

@@ -76,7 +76,7 @@ render () {
         <div className="topnav-right">
           <a onClick={this.toEdit}><h3>Profile</h3></a>
 
-          <a type='button' onClick={this.invokesLogout} name="logoutBtn"><h3>Log Out</h3></a>
+          <a onClick={this.invokesLogout} name="logoutBtn"><h3>Log Out</h3></a>
         </div>
       </Fragment>
       }

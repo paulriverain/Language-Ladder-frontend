@@ -1,20 +1,55 @@
 .App {
   text-align: center;
+    background: #edf5e1;
+    padding-bottom: 15px
+}
+
+.AppBody{
+  background: #edf5e1;
+
 }
 
 .App-logo {
   animation: App-logo-spin infinite 16s linear;
-  height: 15vmin;
+  height: 13vmin;
+}
+
+.App-header b{
+  /* background-image: linear-gradient(to top right, #498F7F,#7abd61); */
+  background-color:#5cdb95;
+  display: flex;
+  flex-direction: column;
+  min-height: 15vh;
+  flex-direction: column;
+  font-size: calc(2.3em + 1vmin);
+  color: #05386b;
+}
+
+.App-header img{
+  background-color:#5cdb95;
+  min-height: 20vh;
+  margin: auto;
+  flex-direction: column;
+  font-size: calc(2.5em + 2vmin);
+  color: #05386b;
+  border-radius: 100px;
+}
+
+
+@media only screen and (max-width: 550px) {
+  .App-header b{
+    font-size: 1.6em;
+  }
 }
 
 
 .App-header {
-  background-color:#498F7F;
+  background-color:#5cdb95;
   min-height: 15vh;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  color: #FFFFFF;
+  font-size: calc(2.0em + 2vmin);
+  color: #05386b;
 }
 
 .App-link {
@@ -31,15 +66,15 @@
 }
 
 .TranslateContainer {
-  /* border-style: dashed; */
-  background: #c0ecb0;
+  background: #5cdb95;
   text-align: center;
-  width: 70%;
+  max-width: 50%;
   min-width: 375;
   margin: auto;
   padding-bottom: 2%;
   /* border-radius: 120px; */
   border-radius: 20px;
+  color: #05386b
 
 }
 
@@ -52,48 +87,66 @@
 }
 
 .PhraseContainer{
-  background-color: #7abd61;
-  border: 1px dashed;
+  background-color: #379683;
   text-align: center;
   align-items: center;
   margin: auto;
   width: 75%;
   min-width: 250px;
-  color:#000000;
+  color:#edf5e1;
   border-radius: 15px;
+  margin-bottom: 15px;
+}
+.PhraseContainer h2{
+  font-size: 2.3em;
+  color:#edf5e1;
 }
 
+
 .phraseCard{
-  background: #c0ecb0;
+  background: #8ee4af;
   border: 1px solid #999;
-  width: 80%;
+  width: 70%;
   margin: auto;
   margin-bottom: 2%;
-  color: #33721c;
+  color: #05386b;
   height: auto;
   border-radius: 4px;
 }
 
+@media only screen and (max-width: 550px) {
+  .flipcardholder{
+    min-width: 20vw;
+    min-height:  15vh;
+    margin: auto;
+    padding-right: 40%;
+    /* padding-left: 8%; */
+  }
+}
 .flipcardholder{
   min-width: 25vw;
   min-height:  15vh;
-
-  /* margin: auto; */
-  padding-right: 100%;
-  padding-left: 8%;
+  margin: auto;
+  padding-right: 30%;
+  /* padding-left: 8%; */
+  margin-bottom: 2%;
 }
 
 .messageFlip{
-
-    background: lightblue;
+    background: #edf5e1;
     border: 1px solid #999;
     min-width: 180px;
-    width: auto;
-    color: #33721c;
+    width: 100%;
+    color: #05386b;
     height: auto;
     max-height: 130px;
-  font-size: 70%;
+  max-height: 100%;
 }
+
+
+
+
+
 
 .deletePhrase{
   float: right;
@@ -109,17 +162,17 @@
   flex-grow: 2; /* default 0 */
 }
 
-.ladderSpin{
-  float: left;
-  padding-left: 4px;
-  padding-top: 4px;
-}
-
 
 .loginHolder{
   max-width: 30%;
   margin: auto;
+  color: #05386b;
 }
+.loginHolder input{
+   /* box-shadow: 4px 4px 10px black; */
+   border-style:  2px red;
+}
+
 
 .textAreaBoxes{
   padding: 4px;
@@ -132,11 +185,25 @@
 }
 .LangColumn{
   /* padding-left: 2px */
-
 }
+
+
 
 .testFormBox{
   margin: auto;
 width: 50%;
-/* padding-left: 15% */
+}
+
+.appLogoHeader{
+  object-fit: cover;
+  object-position: -20% 0;
+transform: rotate(40deg);
+  width: 30px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.filterDropdown{
+  width: 25%;
+  margin: auto;
 }
