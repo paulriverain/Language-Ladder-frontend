@@ -1,6 +1,14 @@
 .App {
   text-align: center;
     background: #edf5e1;
+    /* height: 50vh; */
+    padding-bottom: 25px
+}
+
+.Appa {
+  text-align: center;
+    background: #edf5e1;
+    height: 50vh;
     padding-bottom: 15px
 }
 
@@ -15,8 +23,8 @@
 }
 
 .App-header b{
-  /* background-image: linear-gradient(to top right, #498F7F,#7abd61); */
-  background-color:#5cdb95;
+  /* background-image: linear-gradient(to top right, #5cdb95,#7abd61); */
+  /* background-color:#5cdb95; */
   display: flex;
   flex-direction: column;
   min-height: 15vh;
@@ -26,7 +34,7 @@
 }
 
 .App-header img{
-  background-color:#5cdb95;
+  /* background-color:#5cdb95; */
   min-height: 20vh;
   margin: auto;
   flex-direction: column;
@@ -44,6 +52,7 @@
 
 
 .App-header {
+    /* background-image: linear-gradient(to top right, #5cdb95,#379683); */
   background-color:#5cdb95;
   min-height: 15vh;
   display: flex;

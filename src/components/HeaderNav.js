@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../navbar.css'
 import NavBar from './NavBar.js'
 import { withRouter } from 'react-router-dom'
@@ -17,18 +17,25 @@ render () {
   // <div className="appLogoHeader">
   // <img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" alt="ladder logo" />
   // </div>
+  // <div class="tech-slideshow">
+  // <div class="mover-1">
+  // </div>
+  // </div>
   return(
 
-    <div className="App">
+    <div  className="App">
       <div className="App-header">
         <div className="w3-container w3-center w3-animate-opacity">
        <br />
 
 
         {this.state.ladderSpin ?
+          <Fragment>
+
           <div>
             <h1><img src="http://www.pngmart.com/files/7/Ladder-PNG-Photos.png" className="App-logo" alt="spinning ladder logo" /><b><i> Language Ladder </i></b></h1>
           </div>
+          </Fragment>
           :
           <div>
             <br /><br /><br /><br /><br />

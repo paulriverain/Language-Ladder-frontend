@@ -66,32 +66,28 @@ class EditUser extends Component {
 
 
 
-  render () {
-    return(
-      <div className="App">
+render () {
+  return(
+    <div className="App">
+    <br />      <br />      <br />
+      { !this.state.editUser ? <button className="ui primary button" onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
 
-      <br />
-      <br />
-      <br />
+      { this.state.editUser ?<div className="loginHolder">
+        <form className="ui form" onSubmit={this.editSubmit}>
+          Edit Username:<input type="text" lable="Edit Username" defaultValue={this.props.currentUser.username} name="username"  onChange={this.handleNameChange}/><br />
 
-        { !this.state.editUser ? <button className="ui primary button" onClick={this.showEditForm}><h1>Edit Profile</h1></button> : null }
+          Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br /><br />
+          <input type="submit" value="Submit"/>
+        </form>
+        </div>
 
-        { this.state.editUser ?<div className="loginHolder">
-          <form className="ui form" onSubmit={this.editSubmit}>
-            Edit Username:<input type="text" lable="Edit Username" defaultValue={this.props.currentUser.username} name="username"  onChange={this.handleNameChange}/><br />
+      : null }
+      <br /><br />
+      <p><button className="ui button" onClick={this.handlesDeleteUser}>Delete Profile</button></p>
 
-            Edit Password: <input type="password"  placeholder="new password" name="password"  onChange={this.handlePWChange}/><br /><br />
-            <input type="submit" value="Submit"/>
-          </form>
-          </div>
-
-        : null }
-        <br /><br />
-        <p><button className="ui button" onClick={this.handlesDeleteUser}>Delete Profile</button></p>
-
-      </div>
-      )
-  }
+    </div>
+    )
+}
 }
 
 export default EditUser;

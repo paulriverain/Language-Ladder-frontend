@@ -66,6 +66,7 @@ render () {
 
   return(
     <div className="App">
+    
       <div className="w3-container w3-center w3-animate-opacity">
         <div className='PhraseContainer'>
           <Fragment>
@@ -109,6 +110,7 @@ render () {
                 </Fragment>
 
               }
+
             </Fragment>
           </Fragment>
         </div>

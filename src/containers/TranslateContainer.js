@@ -28,6 +28,7 @@ class TranslateContainer extends Component {
 
           </div>
           </div>
+          
         <input className="ui primary button" type="submit" value="Translate"/>
         </form>
         {this.props.currentState.currentUser === null

@@ -28,21 +28,20 @@ class MainContainer extends Component {
 
   }
 
-//-------------------------------------------------------------------------
-// Fetches for usertoken and calls phrases for that user if user !null-----
+//------------------------------------------------------------------------
+// Fetches for usertoken and calls phrases for that user if user !null----
   componentDidMount(){
     const token = localStorage.getItem('token')
-
+  //Fetches for languages
     fetch('http://localhost:3000/api/v1/languages')
     .then(res => res.json())
     .then(languages => this.setState({languages: languages}))
-
+  //Fetches for phrases
     fetch('http://localhost:3000/api/v1/phrases')
     .then(res=> res.json())
     .then(phrases => {
       this.setState({phrases: phrases})
     })
-
     if(token) {
     //Fetches for the token
       fetch('http://localhost:3000/api/v1/current_user', {
@@ -133,7 +132,6 @@ updateCurretUser = (updatedUser) =>{
     }else if(this.state.currentLang === ""){
         alert("Invalid input")
     } else{
-      
       console.log("passes what state here?:", this.state);
       fetch('http://localhost:3000/api/v1/phrases/translate',{
         method: "POST",
@@ -240,7 +238,7 @@ console.log(this.state.currentUser);
       showEdit={this.handlesEdit}
     />
 
-
+  <div className="Appa">
     <Switch>
     <Route exact path="/edit" render={ () => {
       return <EditUser currentUser={this.state.currentUser} updateUser={this.updateCurretUser} onLogout={this.handleLogoutClick}/>
@@ -319,6 +317,7 @@ console.log(this.state.currentUser);
     }}/>
 
 </Switch>
+</div>
   </Fragment>
 
     );
