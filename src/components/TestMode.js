@@ -32,7 +32,6 @@ render () {
   return(
     <div className="App">
       <div className='PhraseContainer'>
-
         <div><br />
           <h2><i><u>Language Barrier?</u></i></h2>
           <h3><i><u>Let us help you get you over it!</u></i></h3><br />
@@ -46,10 +45,10 @@ render () {
           </div> <br />
           <div className="Columns">
             {testCard}
-          </div>
+          </div><br />
+        </div>
       </div>
     </div>
-  </div>
 
     )
   }

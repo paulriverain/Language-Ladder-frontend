@@ -11,6 +11,7 @@ class TranslateContainer extends Component {
 
   render () {
     console.log(this.props);
+    console.log(this.props.selectLang);
     return(
       <div className='TranslateContainer'>
       <br />
@@ -28,7 +29,7 @@ class TranslateContainer extends Component {
 
           </div>
           </div>
-          
+
         <input className="ui primary button" type="submit" value="Translate"/>
         </form>
         {this.props.currentState.currentUser === null

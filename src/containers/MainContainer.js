@@ -65,6 +65,7 @@ class MainContainer extends Component {
   handleLogin = (loginInfo) =>{
     localStorage.setItem("token", loginInfo.token)
     this.setState({currentUser: loginInfo})
+    this.setState({trMess: ""})
     this.props.history.push("/")
   }
 
@@ -263,7 +264,7 @@ console.log(this.state.currentUser);
             afterSub={this.state.trMess}
             forSubmit={this.handleSubmit}
             makesPhrase= {this.handleCreatePhrase}
-          /><br /><br />
+          /> <br /><br />
 
             <TestMode
             phrases={userPhrases.filter(userPhrase => this.state.filterLang === userPhrase.language.lang_code || this.state.filterLang === "All Languages...")}
